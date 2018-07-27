@@ -43,4 +43,19 @@ public class HomeController {
 		return "about/about";
 	}
 	
+	
+	@RequestMapping(value = "/Login", method = RequestMethod.GET)
+	public String Login(Model model) {
+		logger.info("로그인");
+		
+		return "User/Login";
+	}
+	
+	@RequestMapping(value = "/Signup", method = RequestMethod.GET)
+	public String Signup(Model model) {
+		logger.info("회원가입");
+		
+		return "User/Signup";
+	}
+	
 }
