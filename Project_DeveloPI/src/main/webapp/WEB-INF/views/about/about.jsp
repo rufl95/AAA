@@ -17,9 +17,9 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="team-member">
-              <img class="mx-auto rounded-circle" src="/resources/img/pro.jpg" alt="">
-              <h4>Kay Garland</h4>
-              <p class="text-muted">Lead Designer</p>
+              <img class="mx-auto rounded-circle" src="/resources/img/about/gyeo.jpg" style="border-radius: 50%;" alt="">
+              <h4>이겨레</h4>
+              <p class="text-muted">팀장</p>
               <ul class="list-inline social-buttons">
                 <li class="list-inline-item">
                   <a href="#">
@@ -41,9 +41,9 @@
           </div>
           <div class="col-sm-4">
             <div class="team-member">
-              <img class="mx-auto rounded-circle" src="/resources/img/pro.jpg" alt="">
-              <h4>Larry Parker</h4>
-              <p class="text-muted">Lead Marketer</p>
+              <img class="mx-auto rounded-circle" src="/resources/img/about/kwack.jpg" style="border-radius: 50%;" alt="">
+              <h4>곽우현</h4>
+              <p class="text-muted">팀원</p>
               <ul class="list-inline social-buttons">
                 <li class="list-inline-item">
                   <a href="#">
@@ -65,9 +65,9 @@
           </div>
           <div class="col-sm-4">
             <div class="team-member">
-              <img class="mx-auto rounded-circle" src="/resources/img/pro.jpg" alt="">
-              <h4>Diana Pertersen</h4>
-              <p class="text-muted">Lead Developer</p>
+              <img class="mx-auto rounded-circle" src="/resources/img/about/kim1.jpg" style="border-radius: 50%;" alt="">
+              <h4>김동진</h4>
+              <p class="text-muted">팀원</p>
               <ul class="list-inline social-buttons">
                 <li class="list-inline-item">
                   <a href="#">
@@ -88,11 +88,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center">
-            <p class="large text-muted">Team PI / 최고의 팀워크 !</p>
-          </div>
-        </div>
+        
       </div>
     </section>
 </div>
