@@ -12,8 +12,7 @@
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-6">
-				<br><br><br>
-					<h2 >회원가입</h2>
+					<h2 style="margin-top: 70px">회원가입</h2>
 					<br>
 					<form class="form-inline">
 						<table>
