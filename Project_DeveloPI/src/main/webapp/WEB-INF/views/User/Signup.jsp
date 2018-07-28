@@ -4,27 +4,21 @@
 <html>
 <head>
 <<meta charset="utf-8">
-
-<!-- Bootstrap CSS -->
-  <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-  <!-- bootstrap theme -->
-  <link href="resources/css/bootstrap-theme.css" rel="stylesheet">
 <title>Signup</title>
 </head>
-<body class="login-img3-body">
+<body background="#FFFFFF">
 	<div class="container">
-		<form>
 			<div class="row">
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-6">
-				<div class="">
+				<br><br><br>
 					<h2 >회원가입</h2>
-					<br><hr/>
-					<form>
+					<br>
+					<form class="form-inline">
 						<table>
 							<tr>
-								<td>아이디: </td><td><input type="text" name="ID"></td>
+								<td>아이디: </td><td><input type="text" name="ID"  ></td>
 							</tr>
 							<tr>
 								<td>비밀번호: </td><td><input type="password" name="password"></td>
@@ -34,7 +28,7 @@
 							</tr>
 							<tr>
 								<td>생년월일: </td>
-								<td>
+								<td class="form-group">
 									<select name="Year">
 										<%for(int i=0;i<30;i++){
 											%><option><%=1980+i %></option>
@@ -61,7 +55,7 @@
 							<tr>
 								<td>암호 재발급 질문: </td>
 								<td>
-									<select name="Question"> 
+									<select name="Question" > 
 										<option value="Q1">자신의 보물 1호는?</option>
 										<option value="Q2">가장 기억에 남는 선생님 성함은?</option>
 										<option value="Q3">인상 깊게 읽은 책 이름은?</option>
@@ -69,18 +63,14 @@
 								</td>
 							</tr>
 							<tr>
-								<td>암호 재발급 답변: </td><td><input type="text" name="Answer"></td>
+								<td>암호 재발급 답변: &nbsp;&nbsp;&nbsp;</td><td><input type="text" name="Answer" ></td>
 							</tr>
 						</table>
-						<hr>
-						<input type="submit" value="회원가입">
+						<br>
+						<input type="submit" value="회원가입" class="btn btn-default btn-sm">
 					</form>
 					</div>
-					<div col-md-4>
-					</div>
-				</div>
 			</div>
-		</form>
 	</div>
 </body>
 </html>
