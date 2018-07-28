@@ -33,29 +33,29 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "index";
 	}
-	
-	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	@RequestMapping(value = "/about/about", method = RequestMethod.GET)
 	public String about(Model model) {
 		logger.info("어바웃");
 		
 		return "about/about";
 	}
-	
-	
-	@RequestMapping(value = "/Login", method = RequestMethod.GET)
-	public String Login(Model model) {
-		logger.info("로그인");
+	@RequestMapping(value = "/board/qna", method = RequestMethod.GET)
+	public String qna(Model model) {
+		logger.info("Q&A게시판");
 		
-		return "User/Login";
-	}
-	
-	@RequestMapping(value = "/Signup", method = RequestMethod.GET)
-	public String Signup(Model model) {
-		logger.info("회원가입");
+		return "board/qna";
+	}	
+	@RequestMapping(value = "/board/noticeList", method = RequestMethod.GET)
+	public String notice(Model model) {
+		logger.info("공지게시판");
 		
-		return "User/Signup";
+		return "board/noticeList";
+	}@RequestMapping(value = "/board/freeList", method = RequestMethod.GET)
+	public String free(Model model) {
+		logger.info("자유게시판");
+		
+		return "board/freeList";
 	}
-	
 }

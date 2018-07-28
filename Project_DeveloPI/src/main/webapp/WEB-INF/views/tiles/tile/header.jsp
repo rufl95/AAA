@@ -16,7 +16,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand logo" href="index.html"><img src="/resources/img/logo1.png" alt="" style="height: 70px;"></a>
+                <a class="navbar-brand logo" href="/"><img src="/resources/img/logo1.png" alt="" style="height: 70px;"></a>
               </div>
 
               <div class="collapse navbar-collapse" id="navbar">              
@@ -28,12 +28,12 @@
                     </a>
                   </li>
                   <li>
-                    <a href="about">
+                    <a href="about/about">
                     About
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="board/qna">
                     Q & A
                     </a>
                   </li>
@@ -43,12 +43,12 @@
                     </a>
                     <ul class="dropdown">
                       <li>
-                        <a href="post-job.html">
+                        <a href="board/noticeList">
                        NOTICE
                         </a>
                       </li>
                       <li>
-                        <a href="manage-jobs.html">
+                        <a href="board/freeList">
                        FREE
                         </a>
                       </li>
@@ -57,29 +57,29 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right float-right">
                   <li class="left" style="padding-top: 10px;"> <span>로그인이 필요합니다. </span></li>
-                  <li class="right"><a href="my-account.html"><i class="ti-lock"></i>  Log In</a></li>
+                  <li class="right"><a href="User/Login"><i class="ti-lock"></i>  Log In</a></li>
                 </ul>
               </div>
             </div>
             <!-- Mobile Menu Start -->
             <ul class="wpb-mobile-menu">
               <li>
-                <a class="active" href="index.html">Home</a>
+                <a class="active" href="/">Home</a>
               </li>
               <li>
-                <a href="about.html">About</a>
+                <a href="about/about">About</a>
               </li>
               <li>
-                <a href="#">Q & A</a>
+                <a href="board/qna">Q & A</a>
               </li>
               <li>
                 <a href="#">BOARD</a>
                 <ul>
-                  <li><a href="post-job.html">NOTICE</a></li>
-                  <li><a href="manage-jobs.html">FREE</a></li>
+                  <li><a href="board/noticeList">NOTICE</a></li>
+                  <li><a href="board/freeList">FREE</a></li>
                 </ul>
               </li> 
-              <li class="btn-m"><a href="my-account.html"><i class="ti-lock"></i>  Log In</a></li>          
+              <li class="btn-m"><a href="User/Login"><i class="ti-lock"></i>  Log In</a></li>          
             </ul>
             <!-- Mobile Menu End -->  
           </nav>
