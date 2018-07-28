@@ -28,12 +28,12 @@
                     </a>
                   </li>
                   <li>
-                    <a href="about/about">
+                    <a href="/about/about">
                     About
                     </a>
                   </li>
                   <li>
-                    <a href="board/qna">
+                    <a href="/board/qna">
                     Q & A
                     </a>
                   </li>
@@ -43,12 +43,12 @@
                     </a>
                     <ul class="dropdown">
                       <li>
-                        <a href="board/noticeList">
+                        <a href="/board/noticeList">
                        NOTICE
                         </a>
                       </li>
                       <li>
-                        <a href="board/freeList">
+                        <a href="/board/freeList">
                        FREE
                         </a>
                       </li>
@@ -57,29 +57,29 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right float-right">
                   <li class="left" style="padding-top: 10px;"> <span>로그인이 필요합니다. </span></li>
-                  <li class="right"><a href="User/Login"><i class="ti-lock"></i>  Log In</a></li>
+                  <li class="right"><a href="/User/Login"><i class="ti-lock"></i>  Log In</a></li>
                 </ul>
               </div>
             </div>
             <!-- Mobile Menu Start -->
             <ul class="wpb-mobile-menu">
               <li>
-                <a class="active" href="/">Home</a>
+                <a class="/active" href="/">Home</a>
               </li>
               <li>
-                <a href="about/about">About</a>
+                <a href="/about/about">About</a>
               </li>
               <li>
-                <a href="board/qna">Q & A</a>
+                <a href="/board/qna">Q & A</a>
               </li>
               <li>
                 <a href="#">BOARD</a>
                 <ul>
-                  <li><a href="board/noticeList">NOTICE</a></li>
-                  <li><a href="board/freeList">FREE</a></li>
+                  <li><a href="/board/noticeList">NOTICE</a></li>
+                  <li><a href="/board/freeList">FREE</a></li>
                 </ul>
               </li> 
-              <li class="btn-m"><a href="User/Login"><i class="ti-lock"></i>  Log In</a></li>          
+              <li class="btn-m"><a href="/User/Login"><i class="ti-lock"></i>  Log In</a></li>          
             </ul>
             <!-- Mobile Menu End -->  
           </nav>
