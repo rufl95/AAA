@@ -42,39 +42,39 @@ a {
 		</ul>
 	</div>
 	<div class="container">
-		<table class="table">
-			<tbody>
-				<form action="write_ok.jsp" method="post"
+	<form action="write_ok.jsp" method="post"
 					encType="multiplart/form-data">
-				<tr>
-					<th>제목:</th>
-					<td><div class="form-group has-error">
-							<label class="control-label" for="inputError1"></label> <input
-								type="text" class="form-control" id="inputError1">
-						</div></td>
-				</tr>
-				<tr>
-					<th>내용:</th>
-					<td><div class="form-group has-error">
-							<label class="control-label" for="inputError1"></label>
-							<textarea class="form-control" id="inputError1" rows="4"></textarea></td>
-					</div>
-			</tbody>
-			</tr>
+		<table class="table" style="margin-top:20px;">
+			<tbody>
+				
+					<tr>
+						<th>제목:</th>
+						<td><div class="form-group has-error">
+								<label class="control-label" for="inputError1"></label> <input
+									type="text" class="form-control" id="inputError1">
+							</div></td>
+					</tr>
+					<tr>
+						<th>내용:</th>
+						<td><div class="form-group has-error">
+								<label class="control-label" for="inputError1"></label>
+								<textarea class="form-control" id="inputError1" rows="4"></textarea>
+							</div></td>
+					</tr>
 			</tbody>
 		</table>
 		<div class="pull-right">
-			<a class="btn btn-primary" href="KwakBABO.jsp" style="background-color:#FF4F57; border-color:#FF4F57">글쓰기</a>
+			<a class="btn btn-primary" href="KwakBABO.jsp">글쓰기</a>
 		</div>
 		<div class="pull-right">
-			<a class="btn btn-primary" href="#" style="background-color:#FF4F57; border-color:#FF4F57">글수정</a>
+			<a class="btn btn-primary" href="#">글수정</a>
 		</div>
 		<div class="pull-right">
-			<a class="btn btn-primary" href="#" style="background-color:#FF4F57; border-color:#FF4F57">글삭제</a>
+			<a class="btn btn-primary" href="#">글삭제</a>
 		</div>
 
 		<div class="pull-right">
-			<a class="btn btn-primary" href="#" style="background-color:#FF4F57; border-color:#FF4F57">리스트</a>
+			<a class="btn btn-primary" href="#">리스트</a>
 		</div>
 		</form>
 	</div>

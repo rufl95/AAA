@@ -44,7 +44,7 @@ a {
 	<div class="container">
 	<form action="write_ok.jsp" method="post"
 					encType="multiplart/form-data">
-		<table class="table">
+		<table class="table" style="margin-top:20px;">
 			<tbody>
 				
 					<tr>
