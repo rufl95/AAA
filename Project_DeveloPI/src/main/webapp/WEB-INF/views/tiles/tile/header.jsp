@@ -43,12 +43,12 @@
                     </a>
                     <ul class="dropdown">
                       <li>
-                        <a href="/board/noticeList">
+                        <a href="/board/notice">
                        NOTICE
                         </a>
                       </li>
                       <li>
-                        <a href="/board/freeList">
+                        <a href="/board/free">
                        FREE
                         </a>
                       </li>

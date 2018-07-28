@@ -45,17 +45,36 @@ public class HomeController {
 	public String qna(Model model) {
 		logger.info("Q&A게시판");
 		
-		return "board/qna";
+		return "board/qna/qna";
 	}	
-	@RequestMapping(value = "/board/noticeList", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/notice", method = RequestMethod.GET)
 	public String notice(Model model) {
 		logger.info("공지게시판");
 		
-		return "board/noticeList";
-	}@RequestMapping(value = "/board/freeList", method = RequestMethod.GET)
+		return "board/notice/notice";
+	}
+	@RequestMapping(value = "/board/free", method = RequestMethod.GET)
 	public String free(Model model) {
 		logger.info("자유게시판");
 		
-		return "board/freeList";
+		return "board/free/free";
+	}
+	@RequestMapping(value = "/board/qnaForm", method = RequestMethod.GET)
+	public String qnaForm(Model model) {
+		logger.info("자유게시판");
+		
+		return "board/qna/qnaForm";
+	}
+	@RequestMapping(value = "/board/noticeForm", method = RequestMethod.GET)
+	public String noticeForm(Model model) {
+		logger.info("자유게시판");
+		
+		return "board/notice/noticeForm";
+	}
+	@RequestMapping(value = "/board/freeForm", method = RequestMethod.GET)
+	public String freeForm(Model model) {
+		logger.info("자유게시판");
+		
+		return "board/free/freeForm";
 	}
 }
