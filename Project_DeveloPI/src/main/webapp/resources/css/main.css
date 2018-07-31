@@ -3159,17 +3159,6 @@ blockquote p a:hover {
   display: block;
   color: #888;
 }
-.form-control {
-  background-color: #FFF;
-  border: 1px solid #ddd;
-  border-radius: 0px;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075);
-  color: #444;
-  display: block;
-  height: 55px;
-  padding: 15px 10px;
-  width: 100%;
-}
 .form-control:focus {
   box-shadow: none;
 }
