@@ -23,8 +23,6 @@
 <link href="/resources/css/bootstrap-theme.css" rel="stylesheet">
 
 <!-- Material CSS -->
-<link rel="stylesheet" href="/resources/css/material-kit.css"
-	type="text/css">
 <!-- Font Awesome CSS -->
 <link rel="stylesheet" href="/resources/fonts/font-awesome.min.css"
 	type="text/css">
@@ -57,9 +55,6 @@
 <!-- Custom styles -->
 <!-- Team -->
 <link rel="/stylesheet" href="/resources/css/agency.css" type="text/css">
-<!-- Loin -->
-<link href="/resources/css/style.css" rel="stylesheet">
-<link href="/resources/css/style-responsive.css" rel="stylesheet" />
 
 <!-- font icon -->
 <link href="/resources/css/elegant-icons-style.css" rel="stylesheet" />
