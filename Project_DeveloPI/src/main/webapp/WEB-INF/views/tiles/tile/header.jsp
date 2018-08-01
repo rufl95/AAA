@@ -43,7 +43,7 @@
                     </a>
                     <ul class="dropdown">
                       <li>
-                        <a href="/board/noticeList">
+                        <a href="/board/notice">
                        NOTICE
                         </a>
                       </li>
@@ -75,8 +75,8 @@
               <li>
                 <a href="#">BOARD</a>
                 <ul>
-                  <li><a href="/board/noticeList">NOTICE</a></li>
-                  <li><a href="/board/freeList">FREE</a></li>
+                  <li><a href="/board/notice">NOTICE</a></li>
+                  <li><a href="/board/free">FREE</a></li>
                 </ul>
               </li> 
               <li class="btn-m"><a href="/User/Login"><i class="ti-lock"></i>  Log In</a></li>          
