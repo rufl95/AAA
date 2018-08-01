@@ -1,7 +1,5 @@
 package com.pi.developi;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -24,14 +22,8 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+		logger.info("Welcome home!");
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
 		
 		return "index";
 	}
@@ -51,7 +43,7 @@ public class HomeController {
 	public String notice(Model model) {
 		logger.info("공지게시판");
 		
-		return "board/notice/notice";
+		return "board/notice/noticeList";
 	}
 	@RequestMapping(value = "/board/free", method = RequestMethod.GET)
 	public String free(Model model) {
@@ -59,18 +51,21 @@ public class HomeController {
 		
 		return "board/free/free";
 	}
+	
+	/** 맵핑할때 
+	 * /qna/qnaForm 
+	 * /board/free/freeForm 
+	 *  이런식으로 하기 
+	 *  notice랑 free는 board안에 있으니까 앞에 /board라는 경로 추가
+	 *  이 주석 밑으로는 각자 컨트롤러에 맵핑해야함*/
+	
 	@RequestMapping(value = "/board/qnaForm", method = RequestMethod.GET)
 	public String qnaForm(Model model) {
 		logger.info("자유게시판");
 		
 		return "board/qna/qnaForm";
 	}
-	@RequestMapping(value = "/board/noticeForm", method = RequestMethod.GET)
-	public String noticeForm(Model model) {
-		logger.info("자유게시판");
-		
-		return "board/notice/noticeForm";
-	}
+	
 	@RequestMapping(value = "/board/freeForm", method = RequestMethod.GET)
 	public String freeForm(Model model) {
 		logger.info("자유게시판");
