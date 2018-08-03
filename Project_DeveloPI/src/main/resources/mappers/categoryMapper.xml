@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 게시판 네임스페이스(사용영역) 설정 -->
+
+<mapper namespace="com.pi.developi.mappers.categoryMapper">
+
+	<!-- 유저 name 불러오기 -->
+	<select id="getName" resultType="String">
+		SELECT name
+		FROM
+		category
+		where
+		category_no=#{categoryNo}
+	</select>
+
+</mapper>
