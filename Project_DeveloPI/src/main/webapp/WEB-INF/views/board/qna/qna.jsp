@@ -56,8 +56,8 @@ div.panel-body {
 			<col width="6%" />
 			<%-- 						</c:if> --%>
 			<col width="6%" />
-			<col width="*%" />
 			<col width="8%" />
+			<col width="*%" />
 			<col width="12%" />
 			<col width="6%" />
 		</colgroup>

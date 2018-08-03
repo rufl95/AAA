@@ -7,6 +7,7 @@
    <select id="listAll" resultType="article1">
       select * from article where
       board_no=1
+      order by article_no desc
    </select>
 
    <insert id="write">
@@ -34,12 +35,6 @@
       update article set hit=hit+1 where
       article_no=#{article_no}
    </update>
-
-   <select id="serch" resultType="article1">
-      SELECT * FROM article
-      WHERE c LIKE
-      'A%';
-   </select>
 
    <select id="getUser" resultType="users1">
       SELECT * FROM users
@@ -69,7 +64,7 @@
             and
             users.name LIKE
             '%'||#{keyword}||'%'
-
+			order by article_no desc
          </when>
          <otherwise>
             SELECT *
@@ -77,8 +72,9 @@
             WHERE board_no = 1 And
             ${searchOption} LIKE
             '%'||#{keyword}||'%'
-
+			order by article_no desc
          </otherwise>
+         
       </choose>
    </sql>
 </mapper>
