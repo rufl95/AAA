@@ -43,7 +43,7 @@
                     </a>
                     <ul class="dropdown">
                       <li>
-                        <a href="/board/notice">
+                        <a href="/board/notice/?boardNo=2">
                        NOTICE
                         </a>
                       </li>
@@ -75,7 +75,7 @@
               <li>
                 <a href="#">BOARD</a>
                 <ul>
-                  <li><a href="/board/notice">NOTICE</a></li>
+                  <li><a href="/board/notice/?boardNo=2">NOTICE</a></li>
                   <li><a href="/board/free">FREE</a></li>
                 </ul>
               </li> 

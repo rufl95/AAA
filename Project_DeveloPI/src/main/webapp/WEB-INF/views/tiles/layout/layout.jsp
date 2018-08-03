@@ -12,7 +12,7 @@
 
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="/resources/img/favicon.png">
+<link rel="shortcut icon" href="/resources/img/pi_icon.png">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css"
 	type="text/css">
@@ -61,8 +61,20 @@
 <link href="/resources/css/font-awesome.css" rel="stylesheet" />
 
 <style type="text/css">
-@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700&subset=korean');
-font-family: 'Nanum Gothic', sans-serif;
+@import
+	url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700&subset=korean')
+	;
+font-family
+:
+ 
+'
+Nanum
+ 
+Gothic
+'
+,
+sans-serif
+;
 
 /* @font-face {  */
 /*      font-family:"setFont"; */
@@ -88,6 +100,7 @@ font-family: 'Nanum Gothic', sans-serif;
 	</div>
 
 	<!-- Main JS  -->
+	
 	<script type="text/javascript" src="/resources/js/jquery-min.js"></script>
 	<script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/resources/js/material.min.js"></script>
@@ -96,6 +109,7 @@ font-family: 'Nanum Gothic', sans-serif;
 	<script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
 	<script type="text/javascript" src="/resources/js/jquery.slicknav.js"></script>
 	<script type="text/javascript" src="/resources/js/main.js"></script>
+	<script type="text/javascript" src="/resources/js/popper.min.js"></script>
 	<script type="text/javascript"
 		src="/resources/js/jquery.counterup.min.js"></script>
 	<script type="text/javascript" src="/resources/js/waypoints.min.js"></script>
