@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 게시판 네임스페이스(사용영역) 설정 -->
+
+<mapper namespace="com.pi.developi.mappers.userMapper">
+
+	<!-- 유저 ID 불러오기 -->
+	<select id="getId" resultType="users">
+		SELECT USER_NO as userNo, id, password, name, birthday, phone, question,answer, admin
+		FROM
+		USERS
+		where
+		USER_NO=#{userNo}
+	</select>
+
+	<!-- 유저 번호 불러오기 -->
+	<select id="getNo" resultType="int">
+		SELECT user_no as userNo
+		FROM
+		USERS
+		where
+		id=#{id}
+	</select>
+
+</mapper>
