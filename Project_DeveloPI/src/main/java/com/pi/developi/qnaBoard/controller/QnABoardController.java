@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +34,7 @@ public class QnABoardController {
 	}
 
 	@RequestMapping(value = "/board/qnaWrite", method = RequestMethod.POST)
-	public String write(@Valid QnAArticleDTO dtos) {
+	public String write(QnAArticleDTO dtos) {
 		logger.info("Q&A게시판 글 작성");
 
 		service.write(dtos);
