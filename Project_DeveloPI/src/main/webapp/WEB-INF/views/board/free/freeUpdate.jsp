@@ -48,7 +48,7 @@ div.panel-body {
    </div>
 </div>
 <!-- Page Header End -->
-<form name="boardForm" method="post" id="boardForm" action="/board/free/write">
+<form name="form1" method="post" id="boardForm" action="/board/free/update">
 <div class="container">
    <div class="form-body">
       <table class="table table-defualt table-hover">
@@ -70,25 +70,24 @@ div.panel-body {
                      </button>
                      <ul class="dropdown-menu" role="menu"
                         aria-labelledby="dropdownMenu">
-                        <li><a tabindex="-1" href="#" data-value="5" >자유</a></li>
-                        <li><a tabindex="-1" href="#" data-value="6"  >건의사항</a></li>
+                        <li><a tabindex="-1" href="#" data-value="5">자유</a></li>
+                        <li><a tabindex="-1" href="#" data-value="6">건의사항</a></li>
                      </ul>
                      <input type="hidden" value="" name="category_no" id="category_no"/>
-                     
                   </div>
                </td>
                <td colspan="3"></td>
             </tr>
             <tr>
                <th style="vertical-align: inherit;">TITLE</th>
-               <td colspan="4"><input class="form-control" type="text" id="title"
+               <td colspan="4"><input class="form-control" type="text" value='${update.title}' id="title"
                   name='title' value="" style="width: 100%;" /><input type="hidden" value="3" name="board_no"/></td>
             </tr>
          </thead>
          <tbody>
             <tr>
-               <td colspan="5"><textarea class="form-control" name="Content" id="Content"
-                     rows="10"></textarea></td>
+               <td colspan="5"><textarea class="form-control" name="Content"
+                     rows="10" id="Content">${update.content }</textarea><input type="hidden" value="${update.article_no}" name="article_no"/></td>
             </tr>
          </tbody>
       </table>
@@ -96,13 +95,12 @@ div.panel-body {
          <a class="btn btn-common btn-rm" href="/board/free">목록</a>
       </div>
       <div class="pull-right">
-         <a id="write"class="btn btn-common btn-rm" >글쓰기</a>
+         <a id="write"class="btn btn-common btn-rm" >수정하기</a>
       </div>
-
    </div>
 </div>
 </form>
-<script type="text/javascript">
+<script>
 
 $("#write").click(function(){
 	var form = $("#boardForm");
