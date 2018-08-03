@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 게시판 네임스페이스(사용영역) 설정 -->
+
+<mapper namespace="com.pi.developi.mappers.noticeBoardMapper">
+
+	<!-- 글쓰기 -->
+	<insert id="write">
+		INSERT INTO ARTICLE(ARTICLE_NO, TITLE, CONTENT,
+		USER_NO, CATEGORY_NO,
+		A_DATE, BOARD_NO, GROUP_NO, step, indent, hit)
+		VALUES(ARTICLE_SEQ.NEXTVAL, #{title}, #{content}, 1, #{categoryNo},
+		sysdate, 2, 0, 0, 0, 0)
+	</insert>
+
+	<!-- 게시물 전체 목록 불러오기 -->
+	<select id="listAll" resultType="noticeBoard">
+		SELECT ARTICLE_NO as articleNo,
+		TITLE, CONTENT, USER_NO as userNo, CATEGORY_NO as categoryNo,
+		A_DATE as
+		a_date, BOARD_NO as boardNo, GROUP_NO as groupNo,
+		step, indent, hit
+		FROM
+		article
+		where
+		board_no=#{boardNo}
+		order by board_no asc
+	</select>
+
+	<!-- 게시물 불러오기 -->
+	<select id="detail" resultType="noticeBoard">
+		SELECT ARTICLE_NO as articleNo,
+		TITLE, CONTENT, USER_NO as userNo, CATEGORY_NO as categoryNo,
+		A_DATE as
+		a_date, BOARD_NO as boardNo, GROUP_NO as groupNo,
+		step, indent, hit
+		FROM
+		article
+		where
+		article_no=#{articleNo}
+	</select>
+
+	<!-- 게시물 수정하기 -->
+	<update id="modify">
+		UPDATE ARTICLE SET title = #{title}, content =
+		#{content},
+		category_no = 2, a_date = sysdate
+		WHERE article_no =
+		#{articleNo}
+	</update>
+
+	<!-- 게시물 삭제하기 -->
+	<delete id="delete">
+		DELETE FROM ARTICLE WHERE article_no = #{articleNo}
+	</delete>
+
+	<!-- 게시물 검색  -->
+	<select id="search" resultType="noticeBoard">
+		SELECT ARTICLE_NO as articleNo,
+		TITLE, CONTENT, USER_NO as userNo, CATEGORY_NO as categoryNo,
+		A_DATE as
+		a_date, BOARD_NO as boardNo, GROUP_NO as groupNo,
+		step, indent, hit
+		FROM
+		article
+		where
+		board_no=#{boardNo} 
+		<include refid="searchByType"></include>
+		order by board_no desc
+	</select>
+	
+	<!-- 조건절  -->
+	<sql id="searchByType">
+	<choose>
+	<when test="searchType=='title'">
+	and title like concat(concat('%',#{keyword}),'%')
+	</when>
+	<otherwise>
+	<choose>
+	<when test="searchType=='content'">
+	and content like '%${keyword}%'
+	</when>
+	<otherwise>
+	and user_no=${keyword}
+	</otherwise>
+	</choose>
+	</otherwise>
+	</choose>
+	</sql>
+<!-- 	'%'||#{keyword}||'%' -->
+
+<!-- 조회수 증가  -->
+<update id="hitUp">
+UPDATE ARTICLE SET hit=hit+1
+WHERE article_no =#{articleNo}
+</update>
+
+</mapper>
