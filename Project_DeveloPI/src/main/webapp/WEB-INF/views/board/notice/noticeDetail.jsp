@@ -44,47 +44,52 @@ table.table-hover, thead tr th {
 
 <div class="container">
 	<div class="pull-right">
-		<a class="btn btn-common btn-rm" href="/board/notice">목록</a> <a
-			class="btn btn-common btn-rm" href="">수정</a> <a
-			class="btn btn-common btn-rm" href="">삭제</a>
+		<a class="btn btn-common btn-rm" href="/board/notice/?boardNo=2">목록</a>
+		
+		<a class="btn btn-common btn-rm" id="modifyBnt"
+			href="/board/notice/noticeModifyForm?articleNo=${article.articleNo}">수정</a> <a
+			class="btn btn-common btn-rm" href="/board/notice/delete?articleNo=${article.articleNo}">삭제</a>
 	</div>
 	<table class="table table-defualt table-hover">
 		<colgroup>
-			<col width="20%">
 			<col width="10%">
 			<col width="10%">
 			<col width="10%">
 			<col width="10%">
 			<col width="10%">
 			<col width="15%">
+			<col width="10%">
 			<col width="20%">
 		</colgroup>
 		<thead>
 			<tr>
 				<th>제목</th>
-				<td colspan="6"><b>제목이다아아아</b></td>
+				<td colspan="5"><b>${article.title}</b></td>
+				<th>카테고리</th>
+				<td><b>[${categoryName}]</b></td>
 			</tr>
 
 			<tr>
 				<th>작성자</th>
-				<td style="text-align: left;">이겨레</td>
+				<td style="text-align: left;">${user.id}</td>
 				<th>조회</th>
-				<td style="text-align: left;">20</td>
-				<td></td>
+				<td style="text-align: left;">${article.hit}</td>
 				<th align="center" style="text-align: right;">작성일</th>
-				<td colspan="2" style="text-align: left;">2018-07-31 23:55</td>
+				<td colspan="1" style="text-align: left;"><fmt:formatDate
+						pattern="yyyy-MM-dd HH:mm" value="${article.a_date}" /></td>
+						<td colspan="2"></td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<td class="table-content" colspan="8"><pre
-						style="padding: 20 50px; text-align: left; background-color: white; height: 300px;">abcd</pre></td>
+						style="padding: 20 50px; text-align: left; background-color: white; height: 300px;">${article.content}</pre></td>
 
 			</tr>
 			<tr>
 				<td colspan="8" style="text-align: center;"><i
-					class="fa fa-thumbs-o-up "></i> 우리 모두가 함께 만드는 소중한 공간입니다. 댓글은 신중히 작성해주세요. <i
-					class="fa fa-thumbs-o-up "></i></td>
+					class="fa fa-thumbs-o-up "></i> 우리 모두가 함께 만드는 소중한 공간입니다. 댓글은 신중히
+					작성해주세요. <i class="fa fa-thumbs-o-up "></i></td>
 			</tr>
 			<tr>
 				<td align=center>댓글</td>
@@ -101,4 +106,3 @@ table.table-hover, thead tr th {
 		</tfoot>
 	</table>
 </div>
-

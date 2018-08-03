@@ -1,6 +1,9 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <style>
 .page-header {
 	background-color: #b8b4b4;
@@ -43,59 +46,65 @@ table.table-hover, thead tr th {
 <!-- Page Header End -->
 
 <div class="container">
-	<table class="table table-defualt table-hover">
-		<colgroup>
-			<%-- 						<c:if test="${login.status>=3}"> --%>
-			<col width="6%" />
-			<%-- 						</c:if> --%>
-			<col width="6%" />
-			<col width="*%" />
-			<col width="8%" />
-			<col width="12%" />
-			<col width="6%" />
-		</colgroup>
-		<thead>
-			<tr>
-				<%-- 			<c:if test="${login.status>=3}"> --%>
-				<th><input type="checkbox" id="checkall" /> 전체</th>
-				<%-- 				</c:if> --%>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td><input type="checkbox" id="checkall" /></td>
-				<td>3</td>
-				<td><a href="/board/notice/noticeDetail">기능 구현중입니다!!!</a></td>
-				<td>이겨레</td>
-				<td>2018-07-31</td>
-				<td>20</td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" id="checkall" /></td>
-				<td>2</td>
-				<td><a href="#">뷰 구현 완료했습니다~</a></td>
-				<td>김동진</td>
-				<td>2018-07-30</td>
-				<td>30</td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" id="checkall" /></td>
-				<td>1</td>
-				<td><a href="#">초기설정입니다~</a></td>
-				<td>곽우현</td>
-				<td>2018-07-28</td>
-				<td>15</td>
-			</tr>
-		</tbody>
-	</table>
+	<form role="form" id="deleteForm" action="/board/notice/noticeDetail"
+		method="post">
+		<table class="table table-defualt table-hover">
+			<colgroup>
+				<col width="6%" />
+				<col width="6%" />
+				<col width="8%" />
+				<col width="*%" />
+				<col width="8%" />
+				<col width="14%" />
+				<col width="6%" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th><input type="checkbox" id="checkall" /> 전체</th>
+					<th>번호</th>
+					<th>카테고리</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:choose>
+					<c:when test="${empty noticeList }">
+						<td colspan="6"
+							style="background-color: white; text-align: center; font-size: 20px;">
+							게시물이 존재하지 않습니다.
+							</td>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${noticeList}" var="noticeBoardDTO"
+							varStatus="status">
+							
+							<tr>
+								<td><input type="checkbox" id="checkall" /></td>
 
+								<td>${noticeBoardDTO.articleNo}</td>
+								<td>${categorylist[status.index]}</td>
+								<td><a
+									href="/board/notice/noticeDetail?articleNo=${noticeBoardDTO.articleNo}">${noticeBoardDTO.title}</a></td>
+								<td>${userList[status.index].id}</td>
+								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+										value="${noticeBoardDTO.a_date}" /></td>
+								<td>${noticeBoardDTO.hit}</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</tbody>
+		</table>
+		<input type="hidden" id="boardNo" value="${boardNo}"/>
+	</form>
+	<div class="pull-left">
+		<a class="btn btn-common btn-rm" href="">삭제</a>
+	</div>
 	<div class="pull-right">
-		<a class="btn btn-common btn-rm" href="/board/noticeForm">글쓰기</a>
+		<a class="btn btn-common btn-rm" href="/board/notice/noticeForm">글쓰기</a>
 	</div>
 
 	<!--  Paging -->
@@ -114,21 +123,29 @@ table.table-hover, thead tr th {
 
 	<!-- 검색창 -->
 	<div class="search-box text-center">
-		<div style="    width: 100%;
-    margin-left: 30%;
-    margin-right: 30%;">
+		<div style="width: 100%; margin-left: 30%; margin-right: 30%;">
 			<select name="searchType" id="searchType" class="form-control"
 				style="display: inline; width: 8%; float: left;">
-				<option value="t">제목</option>
-				<option value="c">내용</option>
-				<option value="u">작성자</option>
+				<option value="title">제목</option>
+				<option value="content">내용</option>
+				<option value="userId">작성자</option>
 			</select> <input type="search" class="form-control" name='keyword'
 				id="keywordInput" value=""
 				style="display: inline; width: 20%; float: left;">
 			<button class="btn btn-common btn-rm" id="searchBtn"
 				style="float: left;">검색</button>
+				
 		</div>
 	</div>
 	<!-- div.search-box -->
 </div>
-
+<script>
+	$('#searchBtn').on('click', (function() {
+		var searchType =  $('select#searchType').val();
+		var keyword = $('input#keywordInput').val();
+		var boardNo = $('input#boardNo').val();
+	
+		console.log(searchType+","+keyword+","+boardNo);
+		location.href = "/board/notice/search?boardNo="+boardNo+"&searchType="+searchType+"&keyword="+keyword;
+	}));
+</script>
