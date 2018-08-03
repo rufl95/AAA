@@ -22,7 +22,8 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home!");
+		logger.info("Welcome home! ", locale);
+		System.out.println("홈이다아아아아아아ㅏ");
 		
 		
 		return "index";
@@ -39,12 +40,7 @@ public class HomeController {
 		
 		return "board/qna/qna";
 	}	
-	@RequestMapping(value = "/board/notice", method = RequestMethod.GET)
-	public String notice(Model model) {
-		logger.info("공지게시판");
-		
-		return "board/notice/noticeList";
-	}
+	
 	@RequestMapping(value = "/board/free", method = RequestMethod.GET)
 	public String free(Model model) {
 		logger.info("자유게시판");
