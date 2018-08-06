@@ -6,32 +6,29 @@
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
 <style>
-/* 현재 위치 알려주는 헤더 */
 .page-header {
 	background-color: #b8b4b4;
 	padding: 20px 0px;
 	margin-bottom: 10px;
 }
 
+.breadcrumb {
+	margin-bottom: 0px;
+}
+
 /* 테이블 행, 열 가운데 정렬 */
-table.table-hover, thead tr th, td, th {
+table.table-hover, thead tr th {
 	text-align: center;
 }
 
-/* 폼 전체 크기 조정 */
-div.panel-body {
-	display: inline-block;
-	width: 80%;
-}
-
-/* 입력폼 바닥 마진 없애기 */
-.form-group {
-	margin-bottom: 0px;
+.pagination-sm>li:first-child>a, .pagination-sm>li:last-child>a {
+	border-radius: 50px;
 }
 </style>
 
 <!-- Page Header Start -->
-<div class="page-header">
+<div class="page-header"
+	style="background-color: #b8b4b4; padding: 20px 0;">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -50,67 +47,74 @@ div.panel-body {
 <!-- Page Header End -->
 
 <div class="container">
-	<form action="/board/qnaWrite" method="post"
-		encType="multiplart/form-data">
-		<div class="form-body">
-			<table class="table table-defualt table-hover">
-				<colgroup>
-					<col width="13%">
-					<col width="7%">
-					<col width="*">
-					<col width="10">
-					<col width="20%">
-				</colgroup>
-				<thead>
-					<tr>
-						<td colspan="2">
-							<div class="dropdown">
-								<button class="btn btn-common btn-rm dropdown-toggle"
-									type="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="true" style="width: 150px">
-									Category<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu"
-									aria-labelledby="dropdownMenu">
-									<li><a tabindex="-1" href="#" data-value="java">JAVA</a></li>
-									<li><a tabindex="-1" href="#" data-value="c">C</a></li>
-								</ul>
-							</div>
-						</td>
-						<td colspan="3"></td>
-					</tr>
-					<tr>
-						<th style="vertical-align: inherit;">TITLE</th>
-						<td colspan="4"><input class="form-control" type="text"
-							name='title' value=${articleDto.title } style="width: 100%;" /></td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td colspan="5"><textarea class="form-control" name="content"
-								rows="10" id="content">${articleDto.content}</textarea></td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="pull-left">
-				<a class="btn btn-common btn-rm" href="/board/qna">목록</a>
-				<div class="pull-right">
-					<a class="btn btn-common btn-rm"
-						href="/board/delete/${articleDto.article_no}">삭제</a>
-				</div>
-			</div>
-			<div class="pull-right">
-				<a class="btn btn-common btn-rm"
-					href="/board/updateView/${articleDto.article_no}">수정</a>
-			</div>
-			<div class="pull-right">
-				<input type="submit" class="btn btn-common btn-rm" value="쓰기">
-			</div>
+	<div class="pull-right">
+		<a class="btn btn-common btn-rm" href="/board/qna">목록</a> <a
+			class="btn btn-common btn-rm" id="modifyBnt"
+			href="/board/updateView/${articleDto.article_no}">수정</a> <a
+			class="btn btn-common btn-rm"
+			href="/board/delete/${articleDto.article_no}">삭제</a>
+	</div>
+	<table class="table table-defualt table-hover">
 
-		</div>
-	</form>
+		<colgroup>
+			<col width="10%">
+			<col width="10%">
+			<col width="10%">
+			<col width="10%">
+			<col width="10%">
+			<col width="15%">
+			<col width="10%">
+			<col width="20%">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>제목</th>
+				<td colspan="5"><b>${articleDto.title }</b></td>
+				<th>카테고리</th>
+				<td><b>[${articleDto.category_name }]</b></td>
+			</tr>
+
+			<tr>
+				<th>작성자</th>
+				<td style="text-align: left;">${articleDto.users_name}</td>
+				<th>조회</th>
+				<td style="text-align: left;">${articleDto.hit}</td>
+				<th align="center" style="text-align: right;">작성일</th>
+				<td colspan="1" style="text-align: left;"><fmt:formatDate
+						pattern="yyyy-MM-dd HH:mm" value="${articleDto.a_date}" /></td>
+				<td colspan="2"></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="table-content" colspan="8"><pre
+						style="padding: 20 50px; text-align: left; background-color: white; height: 300px;">${articleDto.content}</pre></td>
+
+			</tr>
+			<tr>
+				<td colspan="8" style="text-align: center;"><i
+					class="fa fa-thumbs-o-up "></i> 우리 모두가 함께 만드는 소중한 공간입니다. 댓글은 신중히
+					작성해주세요. <i class="fa fa-thumbs-o-up "></i></td>
+			</tr>
+			<form action=/board/reply method="post"
+				encType="multiplart/form-data" name="fr" onsubmit="return check()">
+				<tr>
+					<td align=center>댓글</td>
+					<td colspan="6"><input type="text" name="content"
+						id="newReplyText" size="100" /></td>
+					<td colspan="2" align=center><input type="hidden"
+						name="article_no" value="${articleDto.article_no}" />
+						<button type="submit" id="reply" name="reply"
+							class="btn btn-common btn-rm" size="30"
+							style="background-color: #ff4f578a; height: 30px; padding-top: 7px;">등록</button>
+					</td>
+				</tr>
+			</form>
+		</tbody>
+		<tfoot id='replies'>
+		</tfoot>
+	</table>
 </div>
-
 <script>
 	$(".dropdown-menu li a").click(
 			function() {

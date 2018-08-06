@@ -4,77 +4,87 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pi.developi.mappers.qnaBoardMapper">
-   <select id="listAll" resultType="article1">
-      select * from article where
-      board_no=1
-      order by article_no desc
-   </select>
+	<select id="listAll" resultType="article1">
+		select * from article where
+		board_no=1
+		order by article_no desc
+	</select>
 
-   <insert id="write">
-      insert into article
-      (article_no,title,content,user_no,categoty_no,a_date,board_no,group_no,step,indent,hit)
-      values
-      (article_seq.nextVal,#{title},#{content},2,#{categoty_no},sysdate,1,0,0,0,0)
-   </insert>
+	<insert id="write">
+		insert into article
+		(article_no,title,content,user_no,category_no,a_date,board_no,group_no,step,indent,hit)
+		values
+		(article_seq.nextVal,#{title},#{content},2,#{category_no},sysdate,1,0,0,0,0)
+	</insert>
 
-   <select id="articleDetail" resultType="article1">
-      select * from article
-      where article_no = #{article_no}
-   </select>
+	<select id="articleDetail" resultType="article1">
+		select
+		article_no,title,content,article.user_no,article.category_no,a_date,article.board_no,group_no,step,indent,hit,users.name as users_name,category.name as category_name
+		from article,users,category
+		where article_no = #{article_no} and article.user_no = users.user_no and
+		article.category_no = category.category_no
+	</select>
 
-   <delete id="delete">
-      delete from article where article_no=#{article_no}
-   </delete>
+	<delete id="delete">
+		delete from article where article_no=#{article_no}
+	</delete>
 
-   <update id="update">
-      update article set title = #{title}, content =
-      #{content} where article_no = #{article_no}
-   </update>
+	<update id="update">
+		update article set title = #{title}, content =
+		#{content}, category_no = #{category_no} where article_no = #{article_no}
+	</update>
 
-   <update id="hit">
-      update article set hit=hit+1 where
-      article_no=#{article_no}
-   </update>
+	<update id="hit">
+		update article set hit=hit+1 where
+		article_no=#{article_no}
+	</update>
 
-   <select id="getUser" resultType="users1">
-      SELECT * FROM users
-      WHERE user_no
-      = #{user_no}
-   </select>
+	<select id="getUser" resultType="users1">
+		SELECT * FROM users
+		WHERE user_no
+		= #{user_no}
+	</select>
 
-   <select id="getCategory" resultType="category1">
-      SELECT * FROM category
-      WHERE
-      categoty_no = #{categoty_no}
-   </select>
-   
-   <select id="listSearch" resultType="article1">
-      <include refid="search"></include>
-   </select>
+	<select id="getCategory" resultType="category1">
+		SELECT * FROM category
+		WHERE
+		category_no = #{category_no}
+	</select>
 
-   <sql id="search">
-      <choose>
-         <when test="searchOption=='name'">
-            SELECT *
-            FROM article,
-            users
-            WHERE
-            board_no = 1 and
-            article.user_no = users.user_no
-            and
-            users.name LIKE
-            '%'||#{keyword}||'%'
-			order by article_no desc
-         </when>
-         <otherwise>
-            SELECT *
-            FROM Article
-            WHERE board_no = 1 And
-            ${searchOption} LIKE
-            '%'||#{keyword}||'%'
-			order by article_no desc
-         </otherwise>
-         
-      </choose>
-   </sql>
+	<select id="listSearch" resultType="article1">
+		<include refid="search"></include>
+	</select>
+
+	<sql id="search">
+		<choose>
+			<when test="searchOption=='name'">
+				SELECT *
+				FROM article,
+				users
+				WHERE
+				board_no = 1 and
+				article.user_no = users.user_no
+				and
+				users.name LIKE
+				'%'||#{keyword}||'%'
+				order by article_no desc
+			</when>
+			<otherwise>
+				SELECT *
+				FROM Article
+				WHERE board_no = 1 And
+				${searchOption} LIKE
+				'%'||#{keyword}||'%'
+				order by article_no desc
+			</otherwise>
+
+		</choose>
+	</sql>
+	
+	<insert id="reply">
+		insert into reply
+		(reply_no,content,user_no,r_date,article_no)
+		values
+		(reply_seq.nextVal,#{content},2,sysdate,#{article_no})
+	</insert>
 </mapper>

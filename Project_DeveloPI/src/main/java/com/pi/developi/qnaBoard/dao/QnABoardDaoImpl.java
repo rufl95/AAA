@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pi.developi.qnaBoard.domain.QnAArticleDTO;
 import com.pi.developi.qnaBoard.domain.QnACategoryDTO;
+import com.pi.developi.qnaBoard.domain.QnAReplyDTO;
 import com.pi.developi.qnaBoard.domain.QnAUsersDTO;
 
 @Repository
@@ -69,19 +70,25 @@ public class QnABoardDaoImpl implements QnABoardDao {
 	}
 
 	@Override
-	public QnACategoryDTO getCategory(int categoty_no) {
+	public QnACategoryDTO getCategory(int category_no) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace + ".getCategory", categoty_no);
+		return sqlSession.selectOne(namespace + ".getCategory", category_no);
 	}
 
-	 @Override
-	   public List<QnAArticleDTO> listSearch(String searchOption, String keyword) {
+	@Override
+	public List<QnAArticleDTO> listSearch(String searchOption, String keyword) {
 
-	      Map<String, String> map = new HashMap<String, String>();
-	      map.put("searchOption", searchOption);
-	      map.put("keyword", keyword);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
 
-	      return sqlSession.selectList(namespace + ".listSearch", map);
-	   }
+		return sqlSession.selectList(namespace + ".listSearch", map);
+	}
+
+	@Override
+	public void reply(QnAReplyDTO dtos) {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace + ".reply", dtos);
+	}
 
 }

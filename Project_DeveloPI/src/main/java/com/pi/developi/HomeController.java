@@ -57,7 +57,7 @@ public class HomeController {
 
       for (QnAArticleDTO articleList : list) {
          name.add(qnaService.getUser(articleList.getUser_no()));
-         category.add(qnaService.getCategory(articleList.getCategoty_no()));
+         category.add(qnaService.getCategory(articleList.getcategory_no()));
       }
       
       System.out.println(name.toString());

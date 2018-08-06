@@ -88,7 +88,7 @@ public class NoticeBoardController {
 		service.modify(noticeBoard);
 		logger.info("수정끝!");
 
-		return "redirect:/board/notice/";
+		return "redirect:/board/notice/?boardNo=2";
 
 	}
 

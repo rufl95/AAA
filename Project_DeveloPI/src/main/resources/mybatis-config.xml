@@ -4,8 +4,25 @@
 <!-- MyBatis XML 설정 파일(MyBatis설정의 중앙 허브 역할) -->
 <configuration>
 	<typeAliases>
-		<!-- 회원 -->
-<!-- 		<typeAlias type="com.ybm.hotdog.user.domain.UserDTO" alias="User"/> -->
-		
+		<!-- 유저 -->
+		<typeAlias type="com.pi.developi.user.domain.UserDTO" alias="users" />
+		<!-- 공지사항 게시판 -->
+		<typeAlias type="com.pi.developi.noticeBoard.domain.NoticeBoardDTO"
+			alias="noticeBoard" />
+		<!-- 카테고리 -->
+		<typeAlias type="com.pi.developi.category.domain.CategoryDTO"
+			alias="category" />
+
+		<!-- 게시글, 유저, 카테고리 - 우현 -->
+		<typeAlias type="com.pi.developi.qnaBoard.domain.QnAArticleDTO"
+			alias="article1" />
+		<typeAlias type="com.pi.developi.qnaBoard.domain.QnAUsersDTO"
+			alias="users1" />
+		<typeAlias type="com.pi.developi.qnaBoard.domain.QnACategoryDTO"
+			alias="category1" />
+		<typeAlias type="com.pi.developi.qnaBoard.domain.QnAReplyDTO"
+			alias="reply1" />
+
+
 	</typeAliases>
 </configuration> 

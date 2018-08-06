@@ -1,8 +1,6 @@
 package com.pi.developi.qnaBoard.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.pi.developi.qnaBoard.dao.QnABoardDao;
 import com.pi.developi.qnaBoard.domain.QnAArticleDTO;
 import com.pi.developi.qnaBoard.domain.QnACategoryDTO;
+import com.pi.developi.qnaBoard.domain.QnAReplyDTO;
 import com.pi.developi.qnaBoard.domain.QnAUsersDTO;
 
 @Service
@@ -77,6 +76,12 @@ public class QnABoardServiceImpl implements QnABoardService {
 	public List<QnAArticleDTO> listSearch(String searchOption, String keyword) {
 		// TODO Auto-generated method stub
 		return dao.listSearch(searchOption, keyword);
+	}
+
+	@Override
+	public void reply(QnAReplyDTO dtos) {
+		// TODO Auto-generated method stub
+		dao.reply(dtos);
 	}
 
 }

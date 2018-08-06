@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.pi.developi.qnaBoard.domain.QnAArticleDTO;
 import com.pi.developi.qnaBoard.domain.QnACategoryDTO;
+import com.pi.developi.qnaBoard.domain.QnAReplyDTO;
 import com.pi.developi.qnaBoard.domain.QnAUsersDTO;
 
 public interface QnABoardDao {
@@ -24,8 +25,9 @@ public interface QnABoardDao {
 
 	public QnAUsersDTO getUser(int user_no);
 
-	public QnACategoryDTO getCategory(int categoty_no);
+	public QnACategoryDTO getCategory(int category_no);
 
 	public List<QnAArticleDTO> listSearch(String searchOption, String keyword);
 
+	public void reply(QnAReplyDTO dtos);
 }

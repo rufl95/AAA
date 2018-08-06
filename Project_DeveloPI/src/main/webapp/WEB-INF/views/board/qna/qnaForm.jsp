@@ -87,7 +87,7 @@ div.panel-body {
 					</tr>
 				</thead>
 				<tbody>
-					<input type="hidden" value="" id="categoty_no" name="categoty_no">
+					<input type="hidden" value="" id="category_no" name="category_no">
 					<tr>
 						<td colspan="5"><textarea class="form-control" name="content"
 								rows="10" id="content"></textarea></td>
@@ -112,7 +112,7 @@ div.panel-body {
 						$(this).text() + ' <span class="caret"></span>');
 				$(this).parents(".dropdown").find('.btn').val(
 						$(this).data('value'));
-				$('#categoty_no').val($(this).data('value'));
+				$('#category_no').val($(this).data('value'));
 			});
 
 	function check() {
@@ -132,7 +132,7 @@ div.panel-body {
 			return false;
 
 		}
-		else if (fr.categoty_no.value == "") {
+		else if (fr.category_no.value == "") {
 
 			alert("카테고리를 지정해 주세요.");
 

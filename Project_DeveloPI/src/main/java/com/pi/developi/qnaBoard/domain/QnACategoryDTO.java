@@ -2,16 +2,16 @@ package com.pi.developi.qnaBoard.domain;
 
 public class QnACategoryDTO {
 
-	private int categoty_no;
+	private int category_no;
 	private String name;
 	private int board_no;
 
-	public int getCategoty_no() {
-		return categoty_no;
+	public int getcategory_no() {
+		return category_no;
 	}
 
-	public void setCategoty_no(int category_no) {
-		this.categoty_no = category_no;
+	public void setcategory_no(int category_no) {
+		this.category_no = category_no;
 	}
 
 	public String getName() {

@@ -8,13 +8,31 @@ public class QnAArticleDTO {
 	private String title;
 	private String content;
 	private int user_no;
-	private int categoty_no;
+	private int category_no;
 	private Date a_date;
 	private int board_no;
 	private int group_no;
 	private int step;
 	private int indent;
 	private int hit;
+	private String users_name;
+	private String category_name;
+	
+	public String getUsers_name() {
+		return users_name;
+	}
+
+	public void setUsers_name(String users_name) {
+		this.users_name = users_name;
+	}
+
+	public String getCategory_name() {
+		return category_name;
+	}
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
 
 	public int getArticle_no() {
 		return article_no;
@@ -48,12 +66,12 @@ public class QnAArticleDTO {
 		this.user_no = user_no;
 	}
 
-	public int getCategoty_no() {
-		return categoty_no;
+	public int getcategory_no() {
+		return category_no;
 	}
 
-	public void setCategoty_no(int category_no) {
-		this.categoty_no = category_no;
+	public void setcategory_no(int category_no) {
+		this.category_no = category_no;
 	}
 
 	public Date getA_date() {

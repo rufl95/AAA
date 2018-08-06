@@ -36,7 +36,7 @@ div.panel-body {
 		<div class="row">
 			<div class="col-md-12">
 				<div class="breadcrumb-wrapper">
-					<h2 class="product-title">Q & A - Modify</h2>
+					<h2 class="product-title">Q & A</h2>
 					<ol class="breadcrumb">
 						<li><a href="#"><i class="ti-home"></i> Home</a></li>
 						<li><a href="#">Board</a></li>
@@ -49,10 +49,9 @@ div.panel-body {
 </div>
 <!-- Page Header End -->
 
-<form action="/board/update" method="post"
-	encType="multiplart/form-data">
-	<input type="hidden" name="article_no" value=${articleDto.article_no }>
-	<div class="container">
+<div class="container">
+	<form action=/board/update method="get" encType="multiplart/form-data"
+		name="fr" onsubmit="return check()">
 		<div class="form-body">
 			<table class="table table-defualt table-hover">
 				<colgroup>
@@ -73,20 +72,24 @@ div.panel-body {
 								</button>
 								<ul class="dropdown-menu" role="menu"
 									aria-labelledby="dropdownMenu">
-									<li><a tabindex="-1" href="#" data-value="java">JAVA</a></li>
-									<li><a tabindex="-1" href="#" data-value="c">C</a></li>
+									<li><a tabindex="-1" href="#" data-value="1">JAVA</a></li>
+									<li><a tabindex="-1" href="#" data-value="2">C</a></li>
+									<li><a tabindex="-1" href="#" data-value="3">PYTHON</a></li>
 								</ul>
 							</div>
 						</td>
 						<td colspan="3"></td>
 					</tr>
 					<tr>
+						<input type="hidden" name="article_no"
+							value=${articleDto.article_no }>
 						<th style="vertical-align: inherit;">TITLE</th>
 						<td colspan="4"><input class="form-control" type="text"
 							name='title' value=${articleDto.title } style="width: 100%;" /></td>
 					</tr>
 				</thead>
 				<tbody>
+					<input type="hidden" value="" id="category_no" name="category_no">
 					<tr>
 						<td colspan="5"><textarea class="form-control" name="content"
 								rows="10" id="content">${articleDto.content}</textarea></td>
@@ -94,16 +97,16 @@ div.panel-body {
 				</tbody>
 			</table>
 			<div class="pull-left">
-				<a class="btn btn-common btn-rm"
-					href="/board/qna">목록</a>
+				<a class="btn btn-common btn-rm" href="/board/qna">목록</a>
 			</div>
 			<div class="pull-right">
-				<input type="submit" class="btn btn-common btn-rm submitBtn" value="수정">
+				<input type="submit" class="btn btn-common btn-rm" value="수정">
 			</div>
 
 		</div>
-	</div>
-</form>
+	</form>
+</div>
+
 <script>
 	$(".dropdown-menu li a").click(
 			function() {
@@ -111,12 +114,33 @@ div.panel-body {
 						$(this).text() + ' <span class="caret"></span>');
 				$(this).parents(".dropdown").find('.btn').val(
 						$(this).data('value'));
+				$('#category_no').val($(this).data('value'));
 			});
 
-	$('.submitBtn').on('click', (function() {
-		var formObj = $("#form");
-		formObj.attr("action", "/board/notice/noticeModify");
-		formObj.attr("method", "post");
-		formObj.submit();
-	}));
+	function check() {
+
+		if (fr.title.value == "") {
+
+			alert("제목을 입력해 주세요.");
+
+			return false;
+
+		}
+
+		else if (fr.content.value == "") {
+
+			alert("내용을 입력해 주세요.");
+
+			return false;
+
+		} else if (fr.category_no.value == "") {
+
+			alert("카테고리를 지정해 주세요.");
+
+			return false;
+
+		} else
+			return true;
+
+	}
 </script>
