@@ -110,6 +110,13 @@ table.table-hover, thead tr th {
 					</td>
 				</tr>
 			</form>
+			<c:forEach items="${li}" var="dto" varStatus="status">
+				<tr>
+					<td>${dto.name}</td>
+					<td>${dto.content}</td>
+					<td>${dto.r_date}</td>
+				<tr>
+			</c:forEach>
 		</tbody>
 		<tfoot id='replies'>
 		</tfoot>

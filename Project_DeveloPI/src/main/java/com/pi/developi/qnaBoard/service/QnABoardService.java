@@ -16,6 +16,8 @@ public interface QnABoardService {
 	public void delete(int article_no);
 
 	public QnAArticleDTO getArticle(int article_no);
+	
+	public List<QnAReplyDTO> getReplyArticle(int article_no);
 
 	public void update(QnAArticleDTO dtos);
 
@@ -30,4 +32,5 @@ public interface QnABoardService {
 	public List<QnAArticleDTO> listSearch(String searchOption, String keyword);
 	
 	public void reply(QnAReplyDTO dtos);
+	
 }

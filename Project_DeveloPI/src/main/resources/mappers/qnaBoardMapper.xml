@@ -19,10 +19,19 @@
 
 	<select id="articleDetail" resultType="article1">
 		select
-		article_no,title,content,article.user_no,article.category_no,a_date,article.board_no,group_no,step,indent,hit,users.name as users_name,category.name as category_name
-		from article,users,category
-		where article_no = #{article_no} and article.user_no = users.user_no and
-		article.category_no = category.category_no
+		article_no,title,content,article.user_no,article.category_no,a_date,article.board_no,group_no,step,indent,hit,users.name
+		as users_name,category.name as category_name
+		from
+		article,users,category
+		where article_no = #{article_no} and
+		article.user_no = users.user_no and
+		article.category_no =
+		category.category_no
+	</select>
+
+	<select id="replyDetail" resultType="reply1">
+		select reply_no,content,reply.user_no,r_date,article_no,users.name from
+		reply,users where reply.user_no = users.user_no and article_no = #{article_no} order by reply_no desc
 	</select>
 
 	<delete id="delete">
@@ -31,7 +40,8 @@
 
 	<update id="update">
 		update article set title = #{title}, content =
-		#{content}, category_no = #{category_no} where article_no = #{article_no}
+		#{content}, category_no = #{category_no} where article_no =
+		#{article_no}
 	</update>
 
 	<update id="hit">
@@ -73,14 +83,15 @@
 				SELECT *
 				FROM Article
 				WHERE board_no = 1 And
-				${searchOption} LIKE
+				${searchOption}
+				LIKE
 				'%'||#{keyword}||'%'
 				order by article_no desc
 			</otherwise>
 
 		</choose>
 	</sql>
-	
+
 	<insert id="reply">
 		insert into reply
 		(reply_no,content,user_no,r_date,article_no)

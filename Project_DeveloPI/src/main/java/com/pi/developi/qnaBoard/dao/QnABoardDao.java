@@ -16,6 +16,8 @@ public interface QnABoardDao {
 	public void delete(int article_no);
 
 	public QnAArticleDTO getArticle(int article_no);
+	
+	public List<QnAReplyDTO> getReplyArticle(int article_no);
 
 	public void update(QnAArticleDTO dtos);
 

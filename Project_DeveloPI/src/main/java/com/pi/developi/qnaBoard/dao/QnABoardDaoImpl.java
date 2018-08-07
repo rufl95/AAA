@@ -46,6 +46,12 @@ public class QnABoardDaoImpl implements QnABoardDao {
 	}
 
 	@Override
+	public List<QnAReplyDTO> getReplyArticle(int article_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace + ".replyDetail", article_no);
+	}
+
+	@Override
 	public void update(QnAArticleDTO dtos) {
 		// TODO Auto-generated method stub
 		sqlSession.update(namespace + ".update", dtos);

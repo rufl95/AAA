@@ -41,6 +41,12 @@ public class QnABoardServiceImpl implements QnABoardService {
 		// TODO Auto-generated method stub
 		return dao.getArticle(article_no);
 	}
+	
+	@Override
+	public List<QnAReplyDTO> getReplyArticle(int article_no) {
+		// TODO Auto-generated method stub
+		return dao.getReplyArticle(article_no);
+	}
 
 	@Override
 	public void update(QnAArticleDTO dtos) {
@@ -83,5 +89,7 @@ public class QnABoardServiceImpl implements QnABoardService {
 		// TODO Auto-generated method stub
 		dao.reply(dtos);
 	}
+
+
 
 }

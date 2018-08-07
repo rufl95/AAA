@@ -54,7 +54,8 @@ public class HomeController {
 
       List<QnAUsersDTO> name = new ArrayList<QnAUsersDTO>();
       List<QnACategoryDTO> category = new ArrayList<QnACategoryDTO>();
-
+      
+      
       for (QnAArticleDTO articleList : list) {
          name.add(qnaService.getUser(articleList.getUser_no()));
          category.add(qnaService.getCategory(articleList.getcategory_no()));

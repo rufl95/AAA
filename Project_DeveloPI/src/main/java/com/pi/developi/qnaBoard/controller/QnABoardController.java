@@ -50,8 +50,9 @@ public class QnABoardController {
 		service.hit(articleNo);
 
 		QnAArticleDTO dtos = service.getArticle(articleNo);
+		List<QnAReplyDTO> dto = service.getReplyArticle(articleNo);
 		model.addAttribute("articleDto", dtos);
-
+		model.addAttribute("li", dto);
 
 		return "board/qna/qnaDetail";
 	}
@@ -117,7 +118,7 @@ public class QnABoardController {
 
 		service.reply(dtos);
 		System.out.println(dtos.getContent());
-		
+
 		return "redirect:/board/qnaDetail/" + dtos.getArticle_no();
 	}
 }
