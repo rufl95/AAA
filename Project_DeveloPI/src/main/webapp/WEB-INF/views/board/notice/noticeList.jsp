@@ -74,13 +74,12 @@ table.table-hover, thead tr th {
 					<c:when test="${empty noticeList }">
 						<td colspan="6"
 							style="background-color: white; text-align: center; font-size: 20px;">
-							게시물이 존재하지 않습니다.
-							</td>
+							게시물이 존재하지 않습니다.</td>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${noticeList}" var="noticeBoardDTO"
 							varStatus="status">
-							
+
 							<tr>
 								<td><input type="checkbox" id="checkall" /></td>
 
@@ -98,7 +97,7 @@ table.table-hover, thead tr th {
 				</c:choose>
 			</tbody>
 		</table>
-		<input type="hidden" id="boardNo" value="${boardNo}"/>
+		<input type="hidden" id="boardNo" value="${boardNo}" />
 	</form>
 	<div class="pull-left">
 		<a class="btn btn-common btn-rm" href="">삭제</a>
@@ -134,18 +133,21 @@ table.table-hover, thead tr th {
 				style="display: inline; width: 20%; float: left;">
 			<button class="btn btn-common btn-rm" id="searchBtn"
 				style="float: left;">검색</button>
-				
+
 		</div>
 	</div>
 	<!-- div.search-box -->
 </div>
 <script>
-	$('#searchBtn').on('click', (function() {
-		var searchType =  $('select#searchType').val();
-		var keyword = $('input#keywordInput').val();
-		var boardNo = $('input#boardNo').val();
-	
-		console.log(searchType+","+keyword+","+boardNo);
-		location.href = "/board/notice/search?boardNo="+boardNo+"&searchType="+searchType+"&keyword="+keyword;
-	}));
+	$('#searchBtn').on(
+			'click',
+			(function() {
+				var searchType = $('select#searchType').val();
+				var keyword = $('input#keywordInput').val();
+				var boardNo = $('input#boardNo').val();
+
+				console.log(searchType + "," + keyword + "," + boardNo);
+				location.href = "/board/notice/search?boardNo=" + boardNo
+						+ "&searchType=" + searchType + "&keyword=" + keyword;
+			}));
 </script>

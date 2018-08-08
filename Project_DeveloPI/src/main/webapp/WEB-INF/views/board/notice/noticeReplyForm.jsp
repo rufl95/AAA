@@ -2,9 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-
 <style>
 /* 현재 위치 알려주는 헤더 */
 .page-header {
@@ -41,6 +38,7 @@ div.panel-body {
 						<li><a href="#"><i class="ti-home"></i> Home</a></li>
 						<li><a href="#">Board</a></li>
 						<li class="current">Notice</li>
+						<li class="current">Reply</li>
 					</ol>
 				</div>
 			</div>
@@ -48,8 +46,8 @@ div.panel-body {
 	</div>
 </div>
 <!-- Page Header End -->
-<form role="form" id="writeForm" action="/board/notice/white"
-	method="POST">
+
+<form role="form" id="form" method="POST" action="/board/notice/replyArticle">
 	<div class="container">
 		<div class="form-body">
 			<table class="table table-defualt table-hover">
@@ -62,46 +60,39 @@ div.panel-body {
 				</colgroup>
 				<thead>
 					<tr>
-						<td colspan="2">
-							<div class="dropdown">
-								<button class="btn btn-common btn-rm dropdown-toggle"
-									type="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="true" style="width: 150px" id="categoryValue">
-									Category<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu"
-									aria-labelledby="dropdownMenu">
-									<li><a tabindex="-1" id="category" data-value="1">JAVA</a></li>
-									<li><a tabindex="-1" id="category2" data-value="2">C</a></li>
-								</ul>
-							</div>
+						<td colspan="5" align="center">
+							[ ${article.groupNo}번 글의 답글 ]
 						</td>
-						<td colspan="3"></td>
 					</tr>
 					<tr>
 						<th style="vertical-align: inherit;">TITLE</th>
 						<td colspan="4"><input class="form-control" type="text"
-							name="title" id="title" value="" style="width: 100%;" />
-							</td>
+							name="title" id="title" value="[답글] ${article.title}"
+							style="width: 100%;" /></td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="5"><textarea class="form-control" name="content"
-								rows="10" id="content"></textarea></td>
+						<td colspan="5"><textarea class="form-control" name="content" id="content1"
+								rows="10" id="content" >${article.content}</textarea></td>
 					</tr>
 				</tbody>
 			</table>
 			<div class="pull-left">
-				<a class="btn btn-common btn-rm" href="/board/notice">목록</a>
+				<a class="btn btn-common btn-rm"
+					href="/board/notice/noticeDetail?articleNo=${article.articleNo}">취소</a>
 			</div>
 			<div class="pull-right">
-				<a class="btn btn-common btn-rm writeBtn">글쓰기</a>
+				<a class="btn btn-common btn-rm registBtn">답글달기</a>
 			</div>
 		</div>
 	</div>
+	<input type="hidden" name="boardNo" id="boardNo" value="${article.boardNo}">
+	<input type="hidden" name="articleNo" id="articleNo" value="${article.articleNo}">
+	<input type="hidden" name="userNo" id="userNo" value="${article.userNo}">
+	<input type="hidden" name="groupNo" id="groupNo" value="${article.groupNo}">
+	<input type="hidden" id="categoryNo" name="categoryNo" value="${article.categoryNo}"/>
 	
-	<input type="hidden" id="categoryNo" name="categoryNo"/>
 </form>
 <script>
 	$(".dropdown-menu li a").click(
@@ -112,11 +103,18 @@ div.panel-body {
 						$(this).data('value'));
 			});
 
-	$('.writeBtn').on('click', (function() {
+	$('.registBtn').on('click', (function() {
 		var categoryNo = $("#categoryValue").val();
 		$("#categoryNo").val(categoryNo);
-		var formObj = $("#writeForm");
-		formObj.attr("action", "/board/notice/write");
+		console.log("title: " + $("#title").val()
+				+ ", content: " + $("#content1").val()
+				+ ", articleNo: " + $("#articleNo").val()
+				+ ", userNo: " + $("#userNo").val()
+				+ ", groupNo: " + $("#groupNo").val()
+				+ ", step: " + $("#step").val()
+				+ ", indent: " + $("#indent").val());
+		var formObj = $("#form");
+		formObj.attr("action", "/board/notice/replyArticle");
 		formObj.attr("method", "post");
 		formObj.submit();
 	}));

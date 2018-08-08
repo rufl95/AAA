@@ -59,7 +59,7 @@
 <!-- font icon -->
 <link href="/resources/css/elegant-icons-style.css" rel="stylesheet" />
 <link href="/resources/css/font-awesome.css" rel="stylesheet" />
-
+<script type="text/javascript" src="/resources/js/jquery-3.3.1.js"></script>
 <style type="text/css">
 @import
 	url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700&subset=korean')
@@ -102,6 +102,7 @@ sans-serif
 	<!-- Main JS  -->
 	
 	<script type="text/javascript" src="/resources/js/jquery-min.js"></script>
+	
 	<script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/resources/js/material.min.js"></script>
 	<script type="text/javascript" src="/resources/js/material-kit.js"></script>

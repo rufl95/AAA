@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.pi.developi.noticeBoard.domain.NoticeBoardDTO;
+import com.pi.developi.noticeBoard.domain.NoticeReplyDTO;
 import com.pi.developi.util.Criteria;
 
 
@@ -67,4 +68,21 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao {
 		sqlSession.update(namespace + ".hitUp", articleNo);
 	}
 	
+	/** 공지게시판 댓글 작성하기 */
+	@Override
+	public void replyRegist(NoticeReplyDTO reply) {
+		 sqlSession.selectList(namespace + ".replyRegist", reply);
+	};
+	
+	/** 공지게시판 댓글 목록 불러오기 */
+	@Override
+	public List<NoticeReplyDTO> replyListAll(int articleNo){
+		return sqlSession.selectList(namespace + ".replyListAll", articleNo);
+	}
+	
+	/** 답글 답답글 구현시 기존의 답글 step 증가  */
+	@Override
+	public void stepUp(NoticeBoardDTO notice){
+		sqlSession.update(namespace + ".stepUp", notice);
+	}
 }

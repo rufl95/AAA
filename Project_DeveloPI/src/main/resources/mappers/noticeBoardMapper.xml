@@ -12,7 +12,7 @@
 		USER_NO, CATEGORY_NO,
 		A_DATE, BOARD_NO, GROUP_NO, step, indent, hit)
 		VALUES(ARTICLE_SEQ.NEXTVAL, #{title}, #{content}, 1, #{categoryNo},
-		sysdate, 2, 0, 0, 0, 0)
+		sysdate, 2, ARTICLE_SEQ.CURRVAL, #{step}, #{indent}, 0)
 	</insert>
 
 	<!-- 게시물 전체 목록 불러오기 -->
@@ -26,7 +26,7 @@
 		article
 		where
 		board_no=#{boardNo}
-		order by board_no asc
+		order by ARTICLE_NO desc, step asc
 	</select>
 
 	<!-- 게시물 불러오기 -->
@@ -45,9 +45,10 @@
 	<!-- 게시물 수정하기 -->
 	<update id="modify">
 		UPDATE ARTICLE SET title = #{title}, content =
-		#{content},
-		category_no = 2, a_date = sysdate
-		WHERE article_no =
+		#{content}, category_no = #{categoryNo},
+		a_date = sysdate
+		WHERE
+		article_no =
 		#{articleNo}
 	</update>
 
@@ -56,45 +57,71 @@
 		DELETE FROM ARTICLE WHERE article_no = #{articleNo}
 	</delete>
 
-	<!-- 게시물 검색  -->
+	<!-- 게시물 검색 -->
 	<select id="search" resultType="noticeBoard">
 		SELECT ARTICLE_NO as articleNo,
-		TITLE, CONTENT, USER_NO as userNo, CATEGORY_NO as categoryNo,
+		TITLE, CONTENT, USER_NO as userNo,
+		CATEGORY_NO as categoryNo,
 		A_DATE as
-		a_date, BOARD_NO as boardNo, GROUP_NO as groupNo,
+		a_date, BOARD_NO as boardNo,
+		GROUP_NO as groupNo,
 		step, indent, hit
 		FROM
 		article
 		where
-		board_no=#{boardNo} 
+		board_no=#{boardNo}
 		<include refid="searchByType"></include>
-		order by board_no desc
+		order by ARTICLE_NO desc
 	</select>
-	
-	<!-- 조건절  -->
-	<sql id="searchByType">
-	<choose>
-	<when test="searchType=='title'">
-	and title like concat(concat('%',#{keyword}),'%')
-	</when>
-	<otherwise>
-	<choose>
-	<when test="searchType=='content'">
-	and content like '%${keyword}%'
-	</when>
-	<otherwise>
-	and user_no=${keyword}
-	</otherwise>
-	</choose>
-	</otherwise>
-	</choose>
-	</sql>
-<!-- 	'%'||#{keyword}||'%' -->
 
-<!-- 조회수 증가  -->
-<update id="hitUp">
-UPDATE ARTICLE SET hit=hit+1
-WHERE article_no =#{articleNo}
-</update>
+	<!-- 조건절 -->
+	<sql id="searchByType">
+		<choose>
+			<when test="searchType=='title'">
+				and title like concat(concat('%',#{keyword}),'%')
+			</when>
+			<otherwise>
+				<choose>
+					<when test="searchType=='content'">
+						and content like '%${keyword}%'
+					</when>
+					<otherwise>
+						and user_no=${keyword}
+					</otherwise>
+				</choose>
+			</otherwise>
+		</choose>
+	</sql>
+	<!-- '%'||#{keyword}||'%' -->
+
+	<!-- 조회수 증가 -->
+	<update id="hitUp">
+		UPDATE ARTICLE SET hit=hit+1
+		WHERE article_no
+		=#{articleNo}
+	</update>
+
+	<!-- 댓글등록 -->
+	<insert id="replyRegist">
+		INSERT INTO REPLY(REPLY_NO,content, user_no, r_date,
+		article_no)
+		VALUES(REPLY_SEQ.NEXTVAL, #{content}, #{userNo}, sysdate,
+		#{articleNo})
+	</insert>
+
+	<!-- 댓글등록 -->
+	<select id="replyListAll" resultType="noticeReply">
+		select REPLY_NO as replyNo
+		,CONTENT ,USER_NO as userNo ,R_DATE ,ARTICLE_NO
+		as articleNo from REPLY
+		where article_no = #{articleNo} order by reply_no desc
+	</select>
+
+	<!-- 답글 답답글 구현시 기존의 답글 step 증가 -->
+	<update id="stepUp">
+		UPDATE ARTICLE SET step=step+1
+		WHERE group_no
+		=#{groupNo} and step>#{step}
+	</update>
 
 </mapper>
