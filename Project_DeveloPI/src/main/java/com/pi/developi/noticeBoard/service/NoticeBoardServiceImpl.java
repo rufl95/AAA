@@ -66,5 +66,8 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	public void stepUp(NoticeBoardDTO notice) {
 		dao.stepUp(notice);
 	}
-
+	@Override
+	public void replyArticleWrite(NoticeBoardDTO notice) {
+		dao.replyArticleWrite(notice);
+	}
 }

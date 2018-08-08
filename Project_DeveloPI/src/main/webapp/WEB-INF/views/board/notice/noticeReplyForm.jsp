@@ -47,7 +47,7 @@ div.panel-body {
 </div>
 <!-- Page Header End -->
 
-<form role="form" id="form" method="POST" action="/board/notice/replyArticle">
+<form role="form" id="form">
 	<div class="container">
 		<div class="form-body">
 			<table class="table table-defualt table-hover">
@@ -67,13 +67,13 @@ div.panel-body {
 					<tr>
 						<th style="vertical-align: inherit;">TITLE</th>
 						<td colspan="4"><input class="form-control" type="text"
-							name="title" id="title" value="[답글] ${article.title}"
+							name="title" id="title" value="${article.title}"
 							style="width: 100%;" /></td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="5"><textarea class="form-control" name="content" id="content1"
+						<td colspan="5"><textarea class="form-control" name="content" 
 								rows="10" id="content" >${article.content}</textarea></td>
 					</tr>
 				</tbody>
@@ -88,7 +88,8 @@ div.panel-body {
 		</div>
 	</div>
 	<input type="hidden" name="boardNo" id="boardNo" value="${article.boardNo}">
-	<input type="hidden" name="articleNo" id="articleNo" value="${article.articleNo}">
+	<input type="hidden" name="step" id="step" value="${article.step}">
+	<input type="hidden" name="indent" id="indent" value="${article.indent}">
 	<input type="hidden" name="userNo" id="userNo" value="${article.userNo}">
 	<input type="hidden" name="groupNo" id="groupNo" value="${article.groupNo}">
 	<input type="hidden" id="categoryNo" name="categoryNo" value="${article.categoryNo}"/>
@@ -105,14 +106,14 @@ div.panel-body {
 
 	$('.registBtn').on('click', (function() {
 		var categoryNo = $("#categoryValue").val();
-		$("#categoryNo").val(categoryNo);
-		console.log("title: " + $("#title").val()
-				+ ", content: " + $("#content1").val()
-				+ ", articleNo: " + $("#articleNo").val()
-				+ ", userNo: " + $("#userNo").val()
-				+ ", groupNo: " + $("#groupNo").val()
-				+ ", step: " + $("#step").val()
-				+ ", indent: " + $("#indent").val());
+// 		$("#categoryNo").val(categoryNo);
+// 		console.log("title: " + $("#title").val()
+// 				+ ", content: " + $("#content1").val()
+// 				+ ", articleNo: " + $("#articleNo").val()
+// 				+ ", userNo: " + $("#userNo").val()
+// 				+ ", groupNo: " + $("#groupNo").val()
+// 				+ ", step: " + $("#step").val()
+// 				+ ", indent: " + $("#indent").val());
 		var formObj = $("#form");
 		formObj.attr("action", "/board/notice/replyArticle");
 		formObj.attr("method", "post");

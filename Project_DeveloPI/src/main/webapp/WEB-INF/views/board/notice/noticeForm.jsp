@@ -48,8 +48,7 @@ div.panel-body {
 	</div>
 </div>
 <!-- Page Header End -->
-<form role="form" id="writeForm" action="/board/notice/white"
-	method="POST">
+<form role="form" id="writeForm">
 	<div class="container">
 		<div class="form-body">
 			<table class="table table-defualt table-hover">

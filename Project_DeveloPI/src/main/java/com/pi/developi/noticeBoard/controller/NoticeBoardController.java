@@ -104,12 +104,10 @@ public class NoticeBoardController {
 	}
 
 	@RequestMapping(value = "/noticeModify", method = { RequestMethod.POST })
-	public String modify(int articleNo, int categoryNo, String content, RedirectAttributes rttr) {
+	public String modify(NoticeBoardDTO noticeBoard, Model model) {
 		logger.info("왔다 수정하기 버튼 눌렀을때!");
-		NoticeBoardDTO article = service.detail(articleNo);
-		article.setCategoryNo(categoryNo);
-		article.setContent(content);
-		service.modify(article);
+		logger.info(noticeBoard.toString());
+		service.modify(noticeBoard);
 		logger.info("수정끝!");
 
 		return "redirect:/board/notice/?boardNo=2";
@@ -120,7 +118,7 @@ public class NoticeBoardController {
 		logger.info("Welcome noticeForm!");
 		return "board/notice/noticeForm";
 	}
-
+	
 	@RequestMapping(value = "/replyArticleForm", method = { RequestMethod.GET })
 	public String replyArticleForm(@RequestParam("articleNo") int articleNo, Model model) {
 		logger.info("와따 답글 작성페이지");
@@ -129,20 +127,23 @@ public class NoticeBoardController {
 		model.addAttribute("article", article);
 		return "board/notice/noticeReplyForm";
 	}
-	
+
 	@RequestMapping(value = "/replyArticle", method = { RequestMethod.POST })
-	public String replyArticle(NoticeBoardDTO noticeBoard, RedirectAttributes rttr) {
+	public String replyArticle(NoticeBoardDTO noticeBoard) {
 		logger.info("들어왔다 답글쓰기 누른곳!!!");
 		logger.info(noticeBoard.toString());
-//		service.stepUp(noticeBoard);
-//		noticeBoard.setStep(noticeBoard.getStep()+1);
-//		noticeBoard.setIndent(noticeBoard.getIndent()+1);
-//		service.write(noticeBoard);
-//		logger.info("수정끝!");
+		service.stepUp(noticeBoard);
+		
+		noticeBoard.setStep(noticeBoard.getStep()+1);
+		noticeBoard.setIndent(noticeBoard.getIndent()+1);
+		
+		logger.info(noticeBoard.toString());
+		service.replyArticleWrite(noticeBoard);
+		logger.info("답글작성끝!");
 
 		return "redirect:/board/notice/?boardNo=2";
 	}
-	
+
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String write(NoticeBoardDTO noticeBoard, Model model) {
 		logger.info("글쓰기눌렀다!");

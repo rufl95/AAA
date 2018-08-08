@@ -26,7 +26,7 @@
 		article
 		where
 		board_no=#{boardNo}
-		order by ARTICLE_NO desc, step asc
+		order by GROUP_NO desc, step asc
 	</select>
 
 	<!-- 게시물 불러오기 -->
@@ -45,8 +45,8 @@
 	<!-- 게시물 수정하기 -->
 	<update id="modify">
 		UPDATE ARTICLE SET title = #{title}, content =
-		#{content}, category_no = #{categoryNo},
-		a_date = sysdate
+		#{content}, category_no = #{categoryNo}, 
+		a_date = sysdate, user_no=#{userNo} 
 		WHERE
 		article_no =
 		#{articleNo}
@@ -119,9 +119,20 @@
 
 	<!-- 답글 답답글 구현시 기존의 답글 step 증가 -->
 	<update id="stepUp">
+		<![CDATA[
 		UPDATE ARTICLE SET step=step+1
 		WHERE group_no
-		=#{groupNo} and step>#{step}
+		=#{groupNo} and step > #{step}
+		]]>
 	</update>
+	
+	<!-- 답글쓰기 -->
+	<insert id="replyArticleWrite">
+		INSERT INTO ARTICLE(ARTICLE_NO, TITLE, CONTENT,
+		USER_NO, CATEGORY_NO,
+		A_DATE, BOARD_NO, GROUP_NO, step, indent, hit)
+		VALUES(ARTICLE_SEQ.NEXTVAL, #{title}, #{content}, #{userNo}, #{categoryNo},
+		sysdate, #{boardNo}, #{groupNo}, #{step}, #{indent}, 0)
+	</insert>
 
 </mapper>

@@ -85,8 +85,14 @@ table.table-hover, thead tr th {
 
 								<td>${noticeBoardDTO.articleNo}</td>
 								<td>${categorylist[status.index]}</td>
-								<td><a
-									href="/board/notice/noticeDetail?articleNo=${noticeBoardDTO.articleNo}">${noticeBoardDTO.title}</a></td>
+								<td align="left" style="margin-left: 10px;">
+								<c:forEach var="i" begin="1" end="${noticeBoardDTO.indent}" step="1">
+								<c:set var="lastSq" value="${noticeBoardDTO.indent-i}"/>
+<!-- <img src="/resources/img/logo1.png" alt="" style="height: 70px;"> -->
+								    &nbsp;&nbsp;&nbsp;&nbsp;
+								<c:if test="${lastSq eq 0}"><img src="/resources/img/reply_icon.gif" alt="→"></c:if>
+								</c:forEach>
+								<a href="/board/notice/noticeDetail?articleNo=${noticeBoardDTO.articleNo}">${noticeBoardDTO.title}</a></td>
 								<td>${userList[status.index].id}</td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 										value="${noticeBoardDTO.a_date}" /></td>

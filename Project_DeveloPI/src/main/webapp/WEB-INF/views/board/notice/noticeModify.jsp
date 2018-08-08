@@ -84,7 +84,7 @@ div.panel-body {
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="5"><textarea class="form-control" id="content1"
+						<td colspan="5"><textarea class="form-control" name="content" id="content"
 								rows="10" id="content">${article.content}</textarea></td>
 					</tr>
 				</tbody>
@@ -101,14 +101,6 @@ div.panel-body {
 	<input type="hidden" name="articleNo"  id="articleNo" value="${article.articleNo}">
 	<input type="hidden" name="userNo"  id="userNo" value="${article.userNo}">
 	<input type="hidden" id="categoryNo" name="categoryNo" value="${article.categoryNo}"/>
-	<input type="hidden" id="a_date" name="a_date" value="${article.a_date}"/>
-	<input type="hidden" name="boardNo" id="boardNo"value="${article.boardNo}">
-	<input type="hidden" name="groupNo"  id="groupNo" value="${article.groupNo}">
-	<input type="hidden" name="step"  id="step" value="${article.step}">
-	<input type="hidden" name="indent"  id="indent" value="${article.indent}">
-	<input type="hidden" name="hit"  id="hit" value="${article.hit}">
-	<input type="hidden" name="content" id="content2" value="">
-	
 </form>
 <script>
 	$(".dropdown-menu li a").click(
@@ -120,20 +112,6 @@ div.panel-body {
 			});
 
 	$('.submitBtn').on('click', (function() {
-		$("#content2").val($("#content1").val());
-		console.log("title: " + $("#title").val()
-				+ ", content: " + $("#content2").val()
-				+ ", articleNo: " + $("#articleNo").val()
-				+ ", categoryNo: " + $("#categoryNo").val()
-				+ ", a_date: " + $("#a_date").val()
-				+ ", userNo: " + $("#userNo").val()
-				+ ", boardNo: " + $("#boardNo").val()
-				+ ", groupNo: " + $("#groupNo").val()
-				+ ", step: " + $("#step").val()
-				+ ", indent: " + $("#indent").val()
-				+ ", hit: " + $("#hit").val());
-		
-		
 		var formObj = $("#form2");
 		formObj.attr("action", "/board/notice/noticeModify");
 		formObj.attr("method", "post");

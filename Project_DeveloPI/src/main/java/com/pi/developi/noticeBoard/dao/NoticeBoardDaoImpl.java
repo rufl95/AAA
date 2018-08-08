@@ -85,4 +85,11 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao {
 	public void stepUp(NoticeBoardDTO notice){
 		sqlSession.update(namespace + ".stepUp", notice);
 	}
+	
+	/** 공지게시판 답글 작성하기 */
+	@Override
+	public void replyArticleWrite(NoticeBoardDTO notice) {
+		sqlSession.insert(namespace + ".replyArticleWrite", notice);
+	}
+	//replyArticleWrite
 }

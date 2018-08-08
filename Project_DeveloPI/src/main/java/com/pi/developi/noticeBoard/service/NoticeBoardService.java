@@ -40,4 +40,6 @@ public interface NoticeBoardService {
 	/** 답글 답답글 구현시 기존의 답글 step 증가  */
 	public void stepUp(NoticeBoardDTO notice);
 
+	/** 공지게시판 답글 작성하기 */
+	public void replyArticleWrite(NoticeBoardDTO notice);
 }
