@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pi.developi.category.service.CategoryService;
 import com.pi.developi.freeBoard.domain.FreeArticleDTO;
-import com.pi.developi.freeBoard.domain.FreeUserDTO;
+import com.pi.developi.freeBoard.domain.FreeReplyDTO;
 import com.pi.developi.freeBoard.service.FreeBoardService;
 
 @Controller
@@ -27,15 +28,20 @@ public class FreeBoardController {
 	@Inject
 	FreeBoardService freeBoardService;
 	
+	@Inject
+	CategoryService categoryService;
+	
 	@RequestMapping(value= "")
 	public ModelAndView list() throws Exception{
 		logger.info("자유게시판 list");
 		List<FreeArticleDTO> list=freeBoardService.listAll();
 		List<String> user=freeBoardService.userId();
+		List<Integer> replyNum=freeBoardService.replyNum();
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("board/free/freeList");
 		mav.addObject("list",list);
 		mav.addObject("user",user);
+		mav.addObject("reply",replyNum);
 		return mav;
 	}
 	
@@ -44,11 +50,15 @@ public class FreeBoardController {
 		logger.info("자유게시판 Detail");
 		freeBoardService.upHit(article_no, session);
 		FreeArticleDTO Detail=freeBoardService.detail(article_no);
+		String category=categoryService.getName(Detail.getCategory_no());
 		String user=freeBoardService.detailId(article_no);
+		List<FreeReplyDTO> reply=freeBoardService.replyList(article_no);
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("board/free/freeDetail");
 		mav.addObject("detail",Detail);
 		mav.addObject("user",user);
+		mav.addObject("reply",reply);
+		mav.addObject("category",category);
 		return mav;
 	}
 	
@@ -81,7 +91,7 @@ public class FreeBoardController {
 		dto.setContent(content);
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("board/free/freeUpdate");
-		mav.addObject("update",dto);
+		mav.addObject("dto",dto);
 		return mav;
 	}
 	
@@ -110,5 +120,31 @@ public class FreeBoardController {
 		mav.setViewName("board/free/freeList");
 		mav.addObject("list",list);
 		return mav;
+	}
+	
+	@RequestMapping(value= "/replyWrite",method = RequestMethod.POST)
+	public String replyWrite(@ModelAttribute FreeReplyDTO dto) throws Exception{
+
+		freeBoardService.replyWrite(dto);
+		logger.info("작성완료");
+		return "redirect: /board/free/freeDetail?article_no="+dto.getArticle_no();
+	}
+	@RequestMapping(value= "/replyArticle",method = RequestMethod.GET)
+	public ModelAndView replyArticle(@RequestParam int group_no,@RequestParam int step,@RequestParam int indent) throws Exception{
+		FreeArticleDTO dto=new FreeArticleDTO();
+		dto.setGroup_no(group_no);
+		dto.setStep(step);
+		dto.setIndent(indent);
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("board/free/freeUpdate");
+		mav.addObject("dto",dto);
+		return mav;
+	}
+	
+	@RequestMapping(value= "/replyArticleWrite",method = RequestMethod.GET)
+	public String replyArticleWrite(@ModelAttribute FreeArticleDTO dto) throws Exception{
+		freeBoardService.replyArticle(dto);
+		ModelAndView mav=new ModelAndView();
+		return "redirect:/board/free";
 	}
 }

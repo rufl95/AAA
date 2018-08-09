@@ -103,7 +103,6 @@ div.panel-body {
 </div>
 </form>
 <script type="text/javascript">
-
 $("#write").click(function(){
 	var form = $("#boardForm");
 	var a=document.getElementById("title").value;

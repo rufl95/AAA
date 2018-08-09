@@ -54,6 +54,7 @@ table.table-hover, thead tr th {
 			<col width="8%" />
 			<col width="12%" />
 			<col width="6%" />
+			<col width="6%" />
 		</colgroup>
 		<thead>
 			<tr>
@@ -65,6 +66,7 @@ table.table-hover, thead tr th {
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
+				<th>댓글</th>
 				<th>조회수</th>
 			</tr>
 		</thead>
@@ -74,10 +76,11 @@ table.table-hover, thead tr th {
 					<td><input type="checkbox" id="checkall" /></td>
 					<td>${list.article_no}</td>
 					<td>${list.name}</td>
-					<td><a href="/board/free/freeDetail?article_no=${list.article_no}">${list.title}</a></td>
+					<td style="text-align: left"><a href="/board/free/freeDetail?article_no=${list.article_no}">${list.title}</a></td>
 					<td>${list.id}</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+					<td><fmt:formatDate pattern="yy-MM-dd HH:mm"
                               value="${list.a_date}" /></td>
+                    <td>${reply.get(status.index) }</td>
 					<td>${list.hit }</td>
 				</tr>
 			</c:forEach>

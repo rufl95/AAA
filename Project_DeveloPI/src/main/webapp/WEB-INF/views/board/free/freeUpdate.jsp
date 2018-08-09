@@ -80,14 +80,14 @@ div.panel-body {
             </tr>
             <tr>
                <th style="vertical-align: inherit;">TITLE</th>
-               <td colspan="4"><input class="form-control" type="text" value='${update.title}' id="title"
+               <td colspan="4"><input class="form-control" type="text" value='${dto.title}' id="title"
                   name='title' value="" style="width: 100%;" /><input type="hidden" value="3" name="board_no"/></td>
             </tr>
          </thead>
          <tbody>
             <tr>
                <td colspan="5"><textarea class="form-control" name="Content"
-                     rows="10" id="Content">${update.content }</textarea><input type="hidden" value="${update.article_no}" name="article_no"/></td>
+                     rows="10" id="Content">${dto.content }</textarea><input type="hidden" value="${dto.article_no}" name="article_no"/></td>
             </tr>
          </tbody>
       </table>

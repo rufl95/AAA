@@ -43,11 +43,16 @@ table.table-hover, thead tr th {
 <!-- Page Header End -->
 
 <div class="container">
-	<div class="pull-right">
-		<a class="btn btn-common btn-rm" href="/board/free">목록</a> <a
-			class="btn btn-common btn-rm" href="/board/free/updateForm?no=${detail.article_no }&title=${detail.title }&content=${detail.content }">수정</a> <a
-			class="btn btn-common btn-rm" href="/board/free/delete?no=${detail.article_no }">삭제</a>
+	<div class="pull-left">
+		<a class="btn btn-common btn-rm" href="/board/free">목록</a>
+		<a class="btn btn-common btn-rm" href="/board/free/replyArticle?group_no=${detail.group_no }&step=${detail.hit}&indent=${detail.indent}">답글</a>
 	</div>
+		
+	<div class="pull-right">
+		<a class="btn btn-common btn-rm" href="/board/free/updateForm?no=${detail.article_no }&title=${detail.title }&content=${detail.content }">수정</a> <a
+		class="btn btn-common btn-rm" href="/board/free/delete?no=${detail.article_no }">삭제</a>
+	</div>
+	<form action="/board/free/replyWrite" method="post">
 	<table class="table table-defualt table-hover">
 		<colgroup>
 			<col width="20%">
@@ -61,8 +66,10 @@ table.table-hover, thead tr th {
 		</colgroup>
 		<thead>
 			<tr>
-				<th>제목</th>
-				<td colspan="6"><b>${detail.title }</b></td>
+				<th colspan="1">제목</th>
+				<td colspan="5"><b>${detail.title }</b></td>
+				<th colspan="1">카테고리</th>
+				<td colspan="1"><b>${category}</b></td>
 			</tr>
 
 			<tr>
@@ -76,6 +83,7 @@ table.table-hover, thead tr th {
 			</tr>
 		</thead>
 		<tbody>
+		
 			<tr>
 				<td class="table-content" colspan="8"><pre
 						style="padding: 20 50px; text-align: left; background-color: white; height: 300px;">${detail.content }</pre></td>
@@ -88,16 +96,34 @@ table.table-hover, thead tr th {
 			</tr>
 			<tr>
 				<td align=center>댓글</td>
-				<td colspan="6"><input type="text" name="replytext"
-					id="newReplyText" size="100" /></td>
+				<td colspan="6"><input type="text" name="content"
+					id="newReplyText" size="100" />
+					<input type="hidden" name="article_no" value="${detail.article_no }">
+					<input type="hidden" name="user_no" value="${detail.user_no }">
+					</td>
 				<td colspan="2" align=center>
-					<button type="button" id="replyAddBtn"
-						class="btn btn-common btn-rm" size="30"
-						style="background-color: #ff4f578a; height: 30px; padding-top: 7px;">등록</button>
+					<button type="submit" id="replyAddBtn"
+						class="btn btn-common btn-rm"
+						style="height: 30px; padding-top: 7px;">등록</button>
 				</td>
 			</tr>
+			<tr>
+				<td colspan="1">번호</td>
+				<td colspan="5">내용</td>
+				<td colspan="1">이름</td>
+				<td colspan="2">날짜</td>
+			</tr>
+			<c:forEach items="${reply}" var="reply" varStatus="status">
+			<tr>
+			<td colspan="1">${reply.reply_no }</td>
+			<td colspan="5">${reply.content }</td>
+			<td colspan="1">${reply.id }</td>
+			<td colspan="2"><fmt:formatDate pattern="yy-MM-dd HH:mm" value="${reply.r_date }" /></td>
+			</tr>
+			</c:forEach>
 		</tbody>
 		<tfoot id='replies'>
 		</tfoot>
 	</table>
+	</form>
 </div>

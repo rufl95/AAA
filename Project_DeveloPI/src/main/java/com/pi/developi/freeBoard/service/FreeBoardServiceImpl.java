@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.pi.developi.freeBoard.dao.FreeBoardDao;
 import com.pi.developi.freeBoard.domain.FreeArticleDTO;
+import com.pi.developi.freeBoard.domain.FreeReplyDTO;
 import com.pi.developi.freeBoard.domain.FreeUserDTO;
 
 @Service
@@ -99,6 +100,30 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Override
 	public List<String> listCategory(int board_no) throws Exception {
 		return FreeBoardDao.listCategory(board_no);
+	}
+
+	@Override
+	public List<FreeReplyDTO> replyList(int article_no) {
+		
+		return FreeBoardDao.replyList(article_no);
+	}
+
+	@Override
+	public void replyWrite(FreeReplyDTO dto) {
+		FreeBoardDao.replyWrite(dto);
+		
+	}
+
+	@Override
+	public List<Integer> replyNum() {
+		// TODO Auto-generated method stub
+		return FreeBoardDao.replyNum();
+	}
+
+	@Override
+	public void replyArticle(FreeArticleDTO dto) {
+		FreeBoardDao.replyArticle(dto);
+		
 	}
 
 

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.pi.developi.freeBoard.domain.FreeArticleDTO;
+import com.pi.developi.freeBoard.domain.FreeReplyDTO;
 import com.pi.developi.freeBoard.domain.FreeUserDTO;
 
 @Repository
@@ -77,5 +78,29 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	public List<String> listCategory(int board_no)  throws Exception{
 		// TODO Auto-generated method stub
 		return SqlSession.selectList(namespace+".listCategory");
+	}
+
+	@Override
+	public List<FreeReplyDTO> replyList(int article_no) {
+		// TODO Auto-generated method stub
+		return SqlSession.selectList(namespace+".replyList",article_no);
+	}
+
+	@Override
+	public void replyWrite(FreeReplyDTO dto) {
+		SqlSession.insert(namespace+".replyWrite",dto);
+		
+	}
+
+	@Override
+	public List<Integer> replyNum() {
+		// TODO Auto-generated method stub
+		return SqlSession.selectList(namespace+".replyNum");
+	}
+
+	@Override
+	public void replyArticle(FreeArticleDTO dto) {
+		// TODO Auto-generated method stub
+		SqlSession.insert(namespace+".replyAricle",dto);
 	}
 }

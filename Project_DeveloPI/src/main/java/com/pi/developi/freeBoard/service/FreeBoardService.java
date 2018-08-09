@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.pi.developi.freeBoard.domain.FreeArticleDTO;
+import com.pi.developi.freeBoard.domain.FreeReplyDTO;
 import com.pi.developi.freeBoard.domain.FreeUserDTO;
 
 public interface FreeBoardService {
@@ -27,4 +28,12 @@ public interface FreeBoardService {
 	public String detailId(int no);
 
 	public List<String> listCategory(int board_no) throws Exception;
+
+	public List<FreeReplyDTO> replyList(int article_no);
+
+	public void replyWrite(FreeReplyDTO dto);
+
+	public List<Integer> replyNum();
+
+	public void replyArticle(FreeArticleDTO dto);
 }

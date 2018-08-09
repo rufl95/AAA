@@ -38,7 +38,7 @@
 	
 	<insert id="write">
 		INSERT INTO ARTICLE(article_no, title, content, user_no, category_no, a_date, board_no, group_no, step, indent, hit)
-		VALUES(ARTICLE_SEQ.NEXTVAL, #{title},  #{Content},  1,  #{category_no},  sysdate,  #{board_no},  1,  1,  1, 0)
+		VALUES(ARTICLE_SEQ.NEXTVAL, #{title},  #{Content},  1,  #{category_no},  sysdate,  #{board_no},  ARTICLE_SEQ.NEXTVAL,  0,  0, 0)
 	</insert>
 	
 	<update id="update">
@@ -74,4 +74,23 @@
 	<select id="listCategory"  resultType="java.lang.String">
 		SELECT name FROM category WHERE board_no=3
 	</select>
+	
+	<select id="replyList"  resultType="com.pi.developi.freeBoard.domain.FreeReplyDTO">
+		SELECT reply_no,content,id,r_date FROM reply r,users u WHERE article_no=#{article_no} and r.user_no=u.user_no
+	</select>
+	
+	<insert id="replyWrite">
+		INSERT INTO REPLY(REPLY_NO,content, user_no, r_date, article_no)
+		VALUES(REPLY_SEQ.NEXTVAL,#{content}, #{user_no}, sysdate, #{article_no})
+	</insert>
+	
+	<select id="replyNum"  resultType="java.lang.Integer">
+		select count(reply_no) from article a left outer join reply r on r.article_no=a.article_no  where board_no=3 group by a.article_no order by a.article_no desc
+	</select>
+	
+	<insert id="replyAricle">
+		INSERT INTO ARTICLE(article_no, title, content, user_no, category_no, a_date, board_no, group_no, step, indent, hit)
+		VALUES(ARTICLE_SEQ.NEXTVAL, #{title},  #{Content},  1,  #{category_no},  sysdate,  3,   #{group_no},  #{step}+1,  #{indent}+1, 0)
+	</insert>
+
 </mapper>
