@@ -103,4 +103,10 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		// TODO Auto-generated method stub
 		SqlSession.insert(namespace+".replyAricle",dto);
 	}
+
+	@Override
+	public void indentUp(FreeArticleDTO dto) {
+		SqlSession.update(namespace+".indentUp", dto);
+		
+	}
 }

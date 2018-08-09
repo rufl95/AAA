@@ -36,4 +36,6 @@ public interface FreeBoardService {
 	public List<Integer> replyNum();
 
 	public void replyArticle(FreeArticleDTO dto);
+
+	public void indentUp(FreeArticleDTO dto);
 }

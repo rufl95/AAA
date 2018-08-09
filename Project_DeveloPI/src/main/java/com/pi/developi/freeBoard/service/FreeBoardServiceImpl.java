@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tiles.request.freemarker.autotag.FreemarkerModelBody;
 import org.springframework.stereotype.Service;
 
 import com.pi.developi.freeBoard.dao.FreeBoardDao;
@@ -124,6 +125,11 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	public void replyArticle(FreeArticleDTO dto) {
 		FreeBoardDao.replyArticle(dto);
 		
+	}
+
+	@Override
+	public void indentUp(FreeArticleDTO dto) {
+		FreeBoardDao.indentUp(dto);
 	}
 
 

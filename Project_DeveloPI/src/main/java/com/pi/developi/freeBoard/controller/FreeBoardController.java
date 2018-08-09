@@ -130,21 +130,27 @@ public class FreeBoardController {
 		return "redirect: /board/free/freeDetail?article_no="+dto.getArticle_no();
 	}
 	@RequestMapping(value= "/replyArticle",method = RequestMethod.GET)
-	public ModelAndView replyArticle(@RequestParam int group_no,@RequestParam int step,@RequestParam int indent) throws Exception{
+	public ModelAndView replyArticle(@RequestParam String title, @RequestParam String content,@RequestParam int category_no,
+			@RequestParam int article_no,@RequestParam int group_no,@RequestParam int step,@RequestParam int indent) throws Exception{
 		FreeArticleDTO dto=new FreeArticleDTO();
+		dto.setTitle(title);
+		dto.setContent(content);
+		dto.setCategory_no(category_no);
+		dto.setArticle_no(article_no);
 		dto.setGroup_no(group_no);
 		dto.setStep(step);
 		dto.setIndent(indent);
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("board/free/freeUpdate");
-		mav.addObject("dto",dto);
+		mav.setViewName("board/free/freeReplyForm");
+		mav.addObject("article",dto);
 		return mav;
 	}
 	
-	@RequestMapping(value= "/replyArticleWrite",method = RequestMethod.GET)
+	@RequestMapping(value= "/replyArticleWrite",method = RequestMethod.POST)
 	public String replyArticleWrite(@ModelAttribute FreeArticleDTO dto) throws Exception{
+		freeBoardService.indentUp(dto);
 		freeBoardService.replyArticle(dto);
-		ModelAndView mav=new ModelAndView();
+		logger.info("작성완료");
 		return "redirect:/board/free";
 	}
 }

@@ -45,7 +45,9 @@ table.table-hover, thead tr th {
 <div class="container">
 	<div class="pull-left">
 		<a class="btn btn-common btn-rm" href="/board/free">목록</a>
-		<a class="btn btn-common btn-rm" href="/board/free/replyArticle?group_no=${detail.group_no }&step=${detail.hit}&indent=${detail.indent}">답글</a>
+		<a class="btn btn-common btn-rm" href="/board/free/replyArticle?title=${detail.title }&content=${detail.content }
+		&board_no=${detail.board_no}&category_no=${detail.category_no }&article_no=${detail.article_no }&group_no=${detail.group_no }
+		&step=${detail.step}&indent=${detail.indent}">답글</a>
 	</div>
 		
 	<div class="pull-right">

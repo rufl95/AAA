@@ -35,4 +35,6 @@ public interface FreeBoardDao {
 
 	public void replyArticle(FreeArticleDTO dto);
 
+	public void indentUp(FreeArticleDTO dto);
+
 }

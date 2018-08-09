@@ -4,10 +4,10 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="FreeBoard">
 	<select id="listAll" resultType="com.pi.developi.freeBoard.domain.FreeArticleDTO">
-		select ARTICLE_NO ,CATEGORY.name,TITLE ,A_DATE ,HIT,id 
-		from ARTICLE,USERS, CATEGORY  
-		where ARTICLE.user_no=USERS.user_no and ARTICLE.board_no=3 and ARTICLE.category_no=CATEGORY.category_no 
-		order by ARTICLE.ARTICLE_NO desc
+		select ARTICLE_NO ,c.name,TITLE ,A_DATE ,HIT,id ,group_no,step,indent
+		from ARTICLE a,USERS u, CATEGORY c  
+		where a.user_no=u.user_no and a.board_no=3 and a.category_no=c.category_no 
+		order by group_no desc,indent
 	</select>
 	
 	<select id="userId" resultType="java.lang.String">
@@ -92,5 +92,9 @@
 		INSERT INTO ARTICLE(article_no, title, content, user_no, category_no, a_date, board_no, group_no, step, indent, hit)
 		VALUES(ARTICLE_SEQ.NEXTVAL, #{title},  #{Content},  1,  #{category_no},  sysdate,  3,   #{group_no},  #{step}+1,  #{indent}+1, 0)
 	</insert>
+	
+	<update id="indentUp">
+		update article set indent=indent+1 where group_no=#{group_no} and indent>#{indent}
+	</update>
 
 </mapper>
