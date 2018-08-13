@@ -80,7 +80,7 @@ div.panel-body {
 			</table>
 			<div class="pull-left">
 				<a class="btn btn-common btn-rm"
-					href="/board/free/freeDetail?article_no=${article.article_no}">취소</a>
+					href="/board/free/freeDetail?article_no=${article.article_no}&pageNum=${nowPage}&searchType=t&keyword=''&isSearch=0">취소</a>
 			</div>
 			<div class="pull-right">
 				<a class="btn btn-common btn-rm registBtn">답글달기</a>
@@ -92,6 +92,7 @@ div.panel-body {
 	<input type="hidden" name="group_no" id="group_no" value="${article.group_no}">
 	<input type="hidden" id="category_no" name="category_no" value="${article.category_no}"/>
 	<input type="hidden" id="article_no" name="article_no" value="${article.article_no}"/>
+	<input type="hidden" id="pageNum" name="pageNum" value="${nowPage}"/>
 	
 </form>
 <script>

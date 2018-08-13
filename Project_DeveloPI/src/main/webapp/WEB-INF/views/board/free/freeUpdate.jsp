@@ -48,7 +48,7 @@ div.panel-body {
    </div>
 </div>
 <!-- Page Header End -->
-<form name="form1" method="post" id="boardForm" action="/board/free/update">
+<form name="form1" method="get" id="boardForm" action="/board/free/update">
 <div class="container">
    <div class="form-body">
       <table class="table table-defualt table-hover">
@@ -74,6 +74,7 @@ div.panel-body {
                         <li><a tabindex="-1" href="#" data-value="6">건의사항</a></li>
                      </ul>
                      <input type="hidden" value="" name="category_no" id="category_no"/>
+                     <input type="hidden" value="${nowPage }" name="pageNum"/>
                   </div>
                </td>
                <td colspan="3"></td>
@@ -92,7 +93,7 @@ div.panel-body {
          </tbody>
       </table>
       <div class="pull-left">
-         <a class="btn btn-common btn-rm" href="/board/free">목록</a>
+         <a class="btn btn-common btn-rm" href="/board/free?pageNum=${nowPage }&searchType=t&keyword=''&isSearch=0">목록</a>
       </div>
       <div class="pull-right">
          <a id="write"class="btn btn-common btn-rm" >수정하기</a>

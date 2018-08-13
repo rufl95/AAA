@@ -93,7 +93,7 @@ div.panel-body {
          </tbody>
       </table>
       <div class="pull-left">
-         <a class="btn btn-common btn-rm" href="/board/free">목록</a>
+         <a class="btn btn-common btn-rm" href="/board/free?pageNum=${nowPage}&searchType=t&keyword=''&isSearch=0">목록</a>
       </div>
       <div class="pull-right">
          <a id="write"class="btn btn-common btn-rm" >글쓰기</a>

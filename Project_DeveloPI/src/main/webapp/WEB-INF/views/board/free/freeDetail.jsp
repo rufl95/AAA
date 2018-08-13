@@ -44,15 +44,15 @@ table.table-hover, thead tr th {
 
 <div class="container">
 	<div class="pull-left">
-		<a class="btn btn-common btn-rm" href="/board/free">목록</a>
+		<a class="btn btn-common btn-rm" href="/board/free?pageNum=${nowPage }&searchType=t&keyword=''&isSearch=0">목록</a>
 		<a class="btn btn-common btn-rm" href="/board/free/replyArticle?title=${detail.title }&content=${detail.content }
 		&board_no=${detail.board_no}&category_no=${detail.category_no }&article_no=${detail.article_no }&group_no=${detail.group_no }
-		&step=${detail.step}&indent=${detail.indent}">답글</a>
+		&step=${detail.step}&indent=${detail.indent}&pageNum=${nowPage}">답글</a>
 	</div>
 		
 	<div class="pull-right">
-		<a class="btn btn-common btn-rm" href="/board/free/updateForm?no=${detail.article_no }&title=${detail.title }&content=${detail.content }">수정</a> <a
-		class="btn btn-common btn-rm" href="/board/free/delete?no=${detail.article_no }">삭제</a>
+		<a class="btn btn-common btn-rm" href="/board/free/updateForm?no=${detail.article_no }&title=${detail.title }&content=${detail.content }&pageNum=${nowPage}">수정</a> <a
+		class="btn btn-common btn-rm" href="/board/free/delete?no=${detail.article_no }&pageNum=${nowPage}">삭제</a>
 	</div>
 	<form action="/board/free/replyWrite" method="post">
 	<table class="table table-defualt table-hover">
@@ -102,6 +102,7 @@ table.table-hover, thead tr th {
 					id="newReplyText" size="100" />
 					<input type="hidden" name="article_no" value="${detail.article_no }">
 					<input type="hidden" name="user_no" value="${detail.user_no }">
+					<input type="hidden" name="pageNum" value="${nowPage }">
 					</td>
 				<td colspan="2" align=center>
 					<button type="submit" id="replyAddBtn"

@@ -1,6 +1,7 @@
 package com.pi.developi.freeBoard.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -19,8 +20,8 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	FreeBoardDao FreeBoardDao;
 
 	@Override
-	public List<FreeArticleDTO> listAll() throws Exception {
-		return FreeBoardDao.listAll();
+	public List<FreeArticleDTO> listAll(Map<String, Object> info) throws Exception {
+		return FreeBoardDao.listAll(info);
 	}
 
 	@Override
@@ -88,12 +89,6 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
-	public List<FreeArticleDTO> search(String type, String keyword) {
-		return FreeBoardDao.search(type,keyword);
-		
-	}
-
-	@Override
 	public String detailId(int no) {
 		return FreeBoardDao.detailId(no);
 	}
@@ -116,9 +111,9 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
-	public List<Integer> replyNum() {
+	public List<Integer> replyNum(Map<String, Object> info) {
 		// TODO Auto-generated method stub
-		return FreeBoardDao.replyNum();
+		return FreeBoardDao.replyNum(info);
 	}
 
 	@Override
@@ -130,6 +125,24 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Override
 	public void indentUp(FreeArticleDTO dto) {
 		FreeBoardDao.indentUp(dto);
+	}
+
+	@Override
+	public int countArticle(String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return FreeBoardDao.countArticle(searchType,keyword);
+	}
+
+	@Override
+	public List<FreeArticleDTO> search(String type, String keyword, Map<String, Object> info) {
+		// TODO Auto-generated method stub
+		return FreeBoardDao.search(type,keyword,info);
+	}
+
+	@Override
+	public List<Integer> searchReplyNum(String searchType, String keyword, Map<String, Object> info) {
+		// TODO Auto-generated method stub
+		return FreeBoardDao.searchReplyNum(searchType,keyword,info);
 	}
 
 

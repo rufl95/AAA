@@ -1,6 +1,8 @@
 package com.pi.developi.freeBoard.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.pi.developi.freeBoard.domain.FreeArticleDTO;
 import com.pi.developi.freeBoard.domain.FreeReplyDTO;
-import com.pi.developi.freeBoard.domain.FreeUserDTO;
 
 @Repository
 public class FreeBoardDaoImpl implements FreeBoardDao{
@@ -20,8 +21,8 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	private static String namespace = "FreeBoard";
 	
 	@Override
-	public List<FreeArticleDTO> listAll() throws Exception {
-		return SqlSession.selectList(namespace + ".listAll");
+	public List<FreeArticleDTO> listAll(Map<String, Object> info) throws Exception {
+		return SqlSession.selectList(namespace + ".listAll",info);
 	}
 
 	@Override
@@ -53,19 +54,22 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 
 	@Override
 	public void delete(int no) {
-		SqlSession.delete(namespace+".delete",no);
+		SqlSession.update(namespace+".delete",no);
 		
 	}
 
 	@Override
-	public List<FreeArticleDTO> search(String type, String keyword) {
+	public List<FreeArticleDTO> search(String type, String keyword,Map<String, Object> info) {
 		keyword="%"+keyword+"%";
+		Map<String,Object> data=new HashMap<>();
+		data.put("keyword", keyword);
+		data.put("info", info);
 		if(type.equals("t")) 
-			return SqlSession.selectList(namespace+".titleSearch",keyword);
+			return SqlSession.selectList(namespace+".titleSearch",data);
 		else if(type.equals("c"))
-			return SqlSession.selectList(namespace+".contentSearch",keyword);
+			return SqlSession.selectList(namespace+".contentSearch",data);
 		else
-			return SqlSession.selectList(namespace+".userSearch",keyword);
+			return SqlSession.selectList(namespace+".userSearch",data);
 	}
 
 	@Override
@@ -93,9 +97,9 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 	}
 
 	@Override
-	public List<Integer> replyNum() {
+	public List<Integer> replyNum(Map<String, Object> info) {
 		// TODO Auto-generated method stub
-		return SqlSession.selectList(namespace+".replyNum");
+		return SqlSession.selectList(namespace+".replyNum",info);
 	}
 
 	@Override
@@ -109,4 +113,30 @@ public class FreeBoardDaoImpl implements FreeBoardDao{
 		SqlSession.update(namespace+".indentUp", dto);
 		
 	}
+
+	@Override
+	public int countArticle(String searchType, String keyword) {
+		keyword="%"+keyword+"%";
+		if(searchType.equals("t")) 
+			return SqlSession.selectOne(namespace+".titleSearchCount",keyword);
+		else if(searchType.equals("c"))
+			return SqlSession.selectOne(namespace+".contentSearchCount",keyword);
+		else
+			return SqlSession.selectOne(namespace+".userSearchCount",keyword);
+	}
+
+	@Override
+	public List<Integer> searchReplyNum(String searchType, String keyword, Map<String, Object> info) {
+		keyword="%"+keyword+"%";
+		Map<String,Object> data=new HashMap<>();
+		data.put("keyword", keyword);
+		data.put("info", info);
+		if(searchType.equals("t")) 
+			return SqlSession.selectList(namespace+".titleSearchNum",data);
+		else if(searchType.equals("c"))
+			return SqlSession.selectList(namespace+".contentSearchNum",data);
+		else
+			return SqlSession.selectList(namespace+".userSearchNum",data);
+	}
+
 }

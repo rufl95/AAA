@@ -15,6 +15,7 @@ public class FreeArticleDTO {
 	private int step;
 	private int indent;
 	private int hit;
+	private int isdeleted;
 	private String id;
 	private String name;
 	
@@ -97,4 +98,11 @@ public class FreeArticleDTO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
+	public int getIsdeleted() {
+		return isdeleted;
+	}
+	public void setIsdeleted(int isdeleted) {
+		this.isdeleted = isdeleted;
+	}
+	
 }
