@@ -14,6 +14,7 @@ public class NoticeBoardDTO {
 	private int step;
 	private int indent;
 	private int hit;
+	private int isdeleted;
 
 
 	public NoticeBoardDTO() {
@@ -108,11 +109,20 @@ public class NoticeBoardDTO {
 		this.hit = hit;
 	}
 
+	public int getIsdeleted() {
+		return isdeleted;
+	}
+
+	public void setIsdeleted(int isdeleted) {
+		this.isdeleted = isdeleted;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeBoardDTO [articleNo=" + articleNo + ", title=" + title + ", content=" + content + ", userNo="
 				+ userNo + ", categoryNo=" + categoryNo + ", a_date=" + a_date + ", boardNo=" + boardNo + ", groupNo="
-				+ groupNo + ", step=" + step + ", indent=" + indent + ", hit=" + hit + "]";
+				+ groupNo + ", step=" + step + ", indent=" + indent + ", hit=" + hit + ", isdeleted=" + isdeleted + "]";
 	}
+
 
 }

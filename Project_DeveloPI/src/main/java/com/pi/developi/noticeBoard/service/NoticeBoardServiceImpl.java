@@ -7,9 +7,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.pi.developi.noticeBoard.dao.NoticeBoardDao;
+import com.pi.developi.noticeBoard.domain.Criteria;
 import com.pi.developi.noticeBoard.domain.NoticeBoardDTO;
 import com.pi.developi.noticeBoard.domain.NoticeReplyDTO;
-import com.pi.developi.util.Criteria;
 
 @Service
 public class NoticeBoardServiceImpl implements NoticeBoardService {
@@ -18,9 +18,9 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	NoticeBoardDao dao;
 
 	@Override
-	public List<NoticeBoardDTO> listAll(int boardNo) {
+	public List<NoticeBoardDTO> listAll(Criteria cri, int boardNo) {
 		// TODO Auto-generated method stub
-		return dao.listAll(boardNo);
+		return dao.listAll(cri, boardNo);
 	}
 
 	@Override
@@ -69,5 +69,15 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 	@Override
 	public void replyArticleWrite(NoticeBoardDTO notice) {
 		dao.replyArticleWrite(notice);
+	}
+
+	@Override
+	public int listCountCriteria(Criteria cri) {
+		// TODO Auto-generated method stub
+		return dao.listCountCriteria(cri);
+	}
+	@Override
+	public int replyCount(int article_no) {
+		return dao.replyCount(article_no);
 	}
 }

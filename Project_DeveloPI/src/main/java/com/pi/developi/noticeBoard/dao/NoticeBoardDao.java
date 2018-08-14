@@ -2,14 +2,14 @@ package com.pi.developi.noticeBoard.dao;
 
 import java.util.List;
 
+import com.pi.developi.noticeBoard.domain.Criteria;
 import com.pi.developi.noticeBoard.domain.NoticeBoardDTO;
 import com.pi.developi.noticeBoard.domain.NoticeReplyDTO;
-import com.pi.developi.util.Criteria;
 
 public interface NoticeBoardDao {
 
 	/** 공지게시판 전체목록 불러오기 */
-	public List<NoticeBoardDTO> listAll(int boardNo);	
+	public List<NoticeBoardDTO> listAll(Criteria cri, int boardNo);	
 	
 	/** 공지게시판 게시물 불러오기 */
 	public NoticeBoardDTO detail(int articleNo);	
@@ -42,5 +42,9 @@ public interface NoticeBoardDao {
 	
 	/** 공지게시판 답글 작성하기 */
 	public void replyArticleWrite(NoticeBoardDTO notice);
+
+	public int listCountCriteria(Criteria cri);
+	
+	public int replyCount(int article_no);
 	
 }

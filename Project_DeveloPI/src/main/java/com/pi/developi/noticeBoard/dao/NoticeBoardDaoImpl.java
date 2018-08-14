@@ -1,6 +1,8 @@
 package com.pi.developi.noticeBoard.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -8,9 +10,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
+import com.pi.developi.noticeBoard.domain.Criteria;
 import com.pi.developi.noticeBoard.domain.NoticeBoardDTO;
 import com.pi.developi.noticeBoard.domain.NoticeReplyDTO;
-import com.pi.developi.util.Criteria;
 
 
 @Repository
@@ -25,9 +27,25 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao {
 	
 	/** 공지게시판 전체목록 불러오기 */
 	@Override
-	public List<NoticeBoardDTO> listAll(int boardNo) {
+	public List<NoticeBoardDTO> listAll(Criteria cri, int boardNo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace + ".listAll", boardNo);
+//		Map<String, Object> paramMap = new HashMap<String, Object>();
+//		paramMap.put("boardNo", boardNo);
+//		paramMap.put("userNo", userNo);	
+		logger.info(cri.getSearchType());
+		if(cri.getSearchType()!=null) {
+		if(cri.getSearchType().equals("title")) {
+			logger.info(cri.toString());
+			
+			return sqlSession.selectList(namespace + ".listAll_T", cri);}
+		else if(cri.getSearchType().equals("content"))
+			return sqlSession.selectList(namespace + ".listAll_C", cri);
+		else if(cri.getSearchType().equals("userNo") && !cri.getKeyword().equals("0") )
+			return sqlSession.selectList(namespace + ".listAll_U", cri);
+		else
+			return sqlSession.selectList(namespace + ".listAll", cri);
+		}else
+			return sqlSession.selectList(namespace + ".listAll", cri);
 	}
 
 	/** 공지게시판 게시물 불러오기 */
@@ -52,7 +70,7 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao {
 	/** 공지게시판 게시물 작성하기 */
 	@Override
 	public void delete(int articleNo) {
-		sqlSession.delete(namespace + ".delete", articleNo);
+		sqlSession.update(namespace + ".delete", articleNo);
 	}
 	//search
 	
@@ -92,4 +110,13 @@ public class NoticeBoardDaoImpl implements NoticeBoardDao {
 		sqlSession.insert(namespace + ".replyArticleWrite", notice);
 	}
 	//replyArticleWrite
+
+	@Override
+	public int listCountCriteria(Criteria cri) {
+		return sqlSession.selectOne(namespace + ".countPaging", cri);
+	}
+	@Override
+	public int replyCount(int article_no) {
+		return sqlSession.selectOne(namespace+".replyCount", article_no);
+	}
 }

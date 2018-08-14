@@ -46,8 +46,8 @@ table.table-hover, thead tr th {
 
 <div class="container">
 	<div class="pull-left">
-		<a class="btn btn-common btn-rm" href="/board/notice/?boardNo=2">목록</a><a
-			class="btn btn-common btn-rm replyArticleBtn" href="/board/notice/replyArticleForm?articleNo=${article.articleNo}">답글</a>
+		<a class="btn btn-common btn-rm" href="/board/notice/${pageMaker.makeSearch(pageMaker.cri.page)}&boardNo=2">목록</a><a
+			class="btn btn-common btn-rm replyArticleBtn" href="/board/notice/replyArticleForm${pageMaker.makeSearch(pageMaker.cri.page)}&articleNo=${article.articleNo}">답글</a>
 	</div>
 	<div class="pull-right">
 		<a class="btn btn-common btn-rm" id="modifyBnt"

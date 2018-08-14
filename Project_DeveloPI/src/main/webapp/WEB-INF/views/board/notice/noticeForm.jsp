@@ -92,7 +92,7 @@ div.panel-body {
 				</tbody>
 			</table>
 			<div class="pull-left">
-				<a class="btn btn-common btn-rm" href="/board/notice">목록</a>
+				<a class="btn btn-common btn-rm" href="/board/notice${pageMaker.makeSearch(pageMaker.cri.page)}&boardNo=2">목록</a>
 			</div>
 			<div class="pull-right">
 				<a class="btn btn-common btn-rm writeBtn">글쓰기</a>
@@ -115,7 +115,7 @@ div.panel-body {
 		var categoryNo = $("#categoryValue").val();
 		$("#categoryNo").val(categoryNo);
 		var formObj = $("#writeForm");
-		formObj.attr("action", "/board/notice/write");
+		formObj.attr("action", "/board/notice/write${pageMaker.makeSearch(pageMaker.cri.page)}");
 		formObj.attr("method", "post");
 		formObj.submit();
 	}));

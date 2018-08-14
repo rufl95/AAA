@@ -85,43 +85,59 @@ table.table-hover, thead tr th {
 
 								<td>${noticeBoardDTO.articleNo}</td>
 								<td>${categorylist[status.index]}</td>
-								<td align="left" style="margin-left: 10px;">
-								<c:forEach var="i" begin="1" end="${noticeBoardDTO.indent}" step="1">
-								<c:set var="lastSq" value="${noticeBoardDTO.indent-i}"/>
-<!-- <img src="/resources/img/logo1.png" alt="" style="height: 70px;"> -->
+								<td align="left" style="padding-left: 50px;"><c:forEach
+										var="i" begin="1" end="${noticeBoardDTO.indent}" step="1">
+										<c:set var="lastSq" value="${noticeBoardDTO.indent-i}" />
+										<!-- <img src="/resources/img/logo1.png" alt="" style="height: 70px;"> -->
 								    &nbsp;&nbsp;&nbsp;&nbsp;
-								<c:if test="${lastSq eq 0}"><img src="/resources/img/reply_icon.gif" alt="→"></c:if>
-								</c:forEach>
-								<a href="/board/notice/noticeDetail?articleNo=${noticeBoardDTO.articleNo}">${noticeBoardDTO.title}</a></td>
+								<c:if test="${lastSq eq 0}">
+											<img src="/resources/img/reply_icon.gif" alt="→">
+										</c:if>
+									</c:forEach> <c:if test="${noticeBoardDTO.isdeleted==1}">
+									<span style="color:grey;">- 삭제된 게시물입니다.</span>
+									</c:if> <c:if test="${noticeBoardDTO.isdeleted==0}">
+										<a
+											href="/board/notice/noticeDetail${pageMaker.makeSearch(pageMaker.cri.page)}&articleNo=${noticeBoardDTO.articleNo}">
+											${noticeBoardDTO.title} <span style="display: inline;">
+													[${replyCountlist[status.index]}]</span></a>
+									</c:if></td>
 								<td>${userList[status.index].id}</td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 										value="${noticeBoardDTO.a_date}" /></td>
 								<td>${noticeBoardDTO.hit}</td>
 							</tr>
+							
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
 			</tbody>
 		</table>
-		<input type="hidden" id="boardNo" value="${boardNo}" />
+		<input type="hidden" id="boardNo" value="${noticeList.get(0).boardNo}" />
 	</form>
 	<div class="pull-left">
 		<a class="btn btn-common btn-rm" href="">삭제</a>
 	</div>
 	<div class="pull-right">
-		<a class="btn btn-common btn-rm" href="/board/notice/noticeForm">글쓰기</a>
+		<a class="btn btn-common btn-rm" href="/board/notice/noticeForm${pageMaker.makeSearch(pageMaker.cri.page)}">글쓰기</a>
 	</div>
 
 	<!--  Paging -->
 	<div class="text-center" style="height: 40px; margin-bottom: 20px;">
 		<ul class="pagination pagination-sm">
-			<li><a href="#"> « </a></li>
-			<li class="active"><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li class="disabled"><a href="#">»</a></li>
+			<c:if test="${pageMaker.prev}">
+				<!--맨 첫페이지 이동 -->
+				<li><a href="/board/notice/${pageMaker.makeSearch(pageMaker.startPage-1)}&boardNo=${boardNo}"> « </a></li>
+			</c:if>
+			<!--페이지번호 -->
+			<c:forEach var='idx' begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
+				step="1">
+				<li <c:out value="${pageMaker.cri.page==idx?' class=active':'' }"/>><a href="/board/notice/${pageMaker.makeSearch(idx)}&boardNo=2">${idx}</a></li>
+			</c:forEach>
+
+			<c:if test="${pageMaker.next&& pageMaker.endPage>0}">
+				<!--다음 페이지 이동 -->
+				<li><a href="/board/notice/${pageMaker.makeSearch(pageMaker.endPage+1)}&boardNo=${boardNo}">»</a></li>
+			</c:if>
 		</ul>
 	</div>
 	<!-- Paging end -->
@@ -131,11 +147,12 @@ table.table-hover, thead tr th {
 		<div style="width: 100%; margin-left: 30%; margin-right: 30%;">
 			<select name="searchType" id="searchType" class="form-control"
 				style="display: inline; width: 8%; float: left;">
-				<option value="title">제목</option>
-				<option value="content">내용</option>
-				<option value="userId">작성자</option>
-			</select> <input type="search" class="form-control" name='keyword'
-				id="keywordInput" value=""
+				<option value="title" <c:out value="${cri.searchType eq 'title'?'selected':''}"/>>제목</option>
+				<option value="content" <c:out value="${cri.searchType eq 'content'?'selected':''}"/>>내용</option>
+				<option value="userId"  <c:out value="${cri.searchType eq 'userId'?'selected':''}"/>>작성자</option>
+			</select> 
+			<input type="search" class="form-control" name='keyword'
+				id="keywordInput" value="${cri.keyword}"
 				style="display: inline; width: 20%; float: left;">
 			<button class="btn btn-common btn-rm" id="searchBtn"
 				style="float: left;">검색</button>
@@ -144,16 +161,25 @@ table.table-hover, thead tr th {
 	</div>
 	<!-- div.search-box -->
 </div>
+
 <script>
 	$('#searchBtn').on(
 			'click',
 			(function() {
-				var searchType = $('select#searchType').val();
+				var searchType = $('#searchType option:selected').val();
 				var keyword = $('input#keywordInput').val();
 				var boardNo = $('input#boardNo').val();
 
 				console.log(searchType + "," + keyword + "," + boardNo);
-				location.href = "/board/notice/search?boardNo=" + boardNo
-						+ "&searchType=" + searchType + "&keyword=" + keyword;
+// 				location.href = "/board/notice/search?boardNo=" + boardNo
+// 						+ "&searchType=" + searchType + "&keyword=" + keyword;
+				
+				self.location.href = "/board/notice/"
+					+ '${pageMaker.makeQuery(1)}'
+					+ "&searchType="
+					+ $("#searchType option:selected").val()
+					+ "&keyword=" + $('#keywordInput').val()
+					+ "&boardNo=" + $('input#boardNo').val();
+			
 			}));
 </script>

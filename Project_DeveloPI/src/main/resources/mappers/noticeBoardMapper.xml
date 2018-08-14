@@ -10,23 +10,87 @@
 	<insert id="write">
 		INSERT INTO ARTICLE(ARTICLE_NO, TITLE, CONTENT,
 		USER_NO, CATEGORY_NO,
-		A_DATE, BOARD_NO, GROUP_NO, step, indent, hit)
-		VALUES(ARTICLE_SEQ.NEXTVAL, #{title}, #{content}, 1, #{categoryNo},
-		sysdate, 2, ARTICLE_SEQ.CURRVAL, #{step}, #{indent}, 0)
+		A_DATE, BOARD_NO, GROUP_NO, step, indent, hit,
+		isdeleted)
+		VALUES(ARTICLE_SEQ.NEXTVAL, #{title}, #{content}, 1,
+		#{categoryNo},
+		sysdate, 2, ARTICLE_SEQ.CURRVAL, #{step}, #{indent},
+		0,0)
 	</insert>
 
 	<!-- 게시물 전체 목록 불러오기 -->
+	<!-- <select id="listAll" resultType="noticeBoard"> SELECT ARTICLE_NO as 
+		articleNo, TITLE, CONTENT, USER_NO as userNo, CATEGORY_NO as categoryNo, 
+		A_DATE as a_date, BOARD_NO as boardNo, GROUP_NO as groupNo, step, indent, 
+		hit, isdeleted FROM article where board_no=#{boardNo} order by GROUP_NO asc, 
+		step asc </select> -->
+
 	<select id="listAll" resultType="noticeBoard">
-		SELECT ARTICLE_NO as articleNo,
-		TITLE, CONTENT, USER_NO as userNo, CATEGORY_NO as categoryNo,
-		A_DATE as
-		a_date, BOARD_NO as boardNo, GROUP_NO as groupNo,
-		step, indent, hit
-		FROM
-		article
-		where
-		board_no=#{boardNo}
-		order by GROUP_NO desc, step asc
+	<![CDATA[
+select rn, articleNo2 as articleNo, TITLE,CONTENT,userNo2 as userNo,categoryNo2 as categoryNo,A_DATE,
+boardNo2 as boardNo, groupNo2 as groupNo,step,indent, hit, isdeleted from(
+SELECT rownum rn, articleNo1 as articleNo2, TITLE,CONTENT, userNo1 as userNo2, categoryNo1 as categoryNo2,A_DATE,
+boardNo1 as boardNo2, groupNo1 as groupNo2, step, indent, hit, isdeleted
+    from 
+    (
+select ARTICLE_NO as articleNo1, TITLE, CONTENT, USER_NO as userNo1, CATEGORY_NO as categoryNo1,
+A_DATE, BOARD_NO as boardNo1, GROUP_NO as groupNo1, step, indent, hit, isdeleted
+FROM ARTICLE
+where board_no=2 
+order by group_NO desc, step asc)order by rownum asc)
+ where rn>=#{pageStart}+1 and rn<=#{pageStart}+10
+	]]>
+	</select>
+	
+	<select id="listAll_T" resultType="noticeBoard">
+	<![CDATA[
+select rn, articleNo2 as articleNo, TITLE,CONTENT,userNo2 as userNo,categoryNo2 as categoryNo,A_DATE,
+boardNo2 as boardNo, groupNo2 as groupNo,step,indent, hit, isdeleted from(
+SELECT rownum rn, articleNo1 as articleNo2, TITLE,CONTENT, userNo1 as userNo2, categoryNo1 as categoryNo2,A_DATE,
+boardNo1 as boardNo2, groupNo1 as groupNo2, step, indent, hit, isdeleted
+    from 
+    (
+select ARTICLE_NO as articleNo1, TITLE, CONTENT, USER_NO as userNo1, CATEGORY_NO as categoryNo1,
+A_DATE, BOARD_NO as boardNo1, GROUP_NO as groupNo1, step, indent, hit, isdeleted
+FROM ARTICLE
+where board_no=2 and title like concat(concat('%',#{keyword}),'%')
+order by group_NO desc, step asc)order by rownum asc)
+ where rn>=#{pageStart}+1 and rn<=#{pageStart}+10
+	]]>
+	</select>
+	
+	<select id="listAll_C" resultType="noticeBoard">
+	<![CDATA[
+select rn, articleNo2 as articleNo, TITLE,CONTENT,userNo2 as userNo,categoryNo2 as categoryNo,A_DATE,
+boardNo2 as boardNo, groupNo2 as groupNo,step,indent, hit, isdeleted from(
+SELECT rownum rn, articleNo1 as articleNo2, TITLE,CONTENT, userNo1 as userNo2, categoryNo1 as categoryNo2,A_DATE,
+boardNo1 as boardNo2, groupNo1 as groupNo2, step, indent, hit, isdeleted
+    from 
+    (
+select ARTICLE_NO as articleNo1, TITLE, CONTENT, USER_NO as userNo1, CATEGORY_NO as categoryNo1,
+A_DATE, BOARD_NO as boardNo1, GROUP_NO as groupNo1, step, indent, hit, isdeleted
+FROM ARTICLE
+where board_no=2 and content like concat(concat('%',#{keyword}),'%') 
+order by group_NO desc, step asc)order by rownum asc)
+ where rn>=#{pageStart}+1 and rn<=#{pageStart}+10
+	]]>
+	</select>
+	
+	<select id="listAll_U" resultType="noticeBoard">
+	<![CDATA[
+select rn, articleNo2 as articleNo, TITLE,CONTENT,userNo2 as userNo,categoryNo2 as categoryNo,A_DATE,
+boardNo2 as boardNo, groupNo2 as groupNo,step,indent, hit, isdeleted from(
+SELECT rownum rn, articleNo1 as articleNo2, TITLE,CONTENT, userNo1 as userNo2, categoryNo1 as categoryNo2,A_DATE,
+boardNo1 as boardNo2, groupNo1 as groupNo2, step, indent, hit, isdeleted
+    from 
+    (
+select ARTICLE_NO as articleNo1, TITLE, CONTENT, USER_NO as userNo1, CATEGORY_NO as categoryNo1,
+A_DATE, BOARD_NO as boardNo1, GROUP_NO as groupNo1, step, indent, hit, isdeleted
+FROM ARTICLE
+where board_no=2 and user_no like concat(concat('%',#{keyword}),'%')
+order by group_NO desc, step asc)order by rownum asc)
+ where rn>=#{pageStart}+1 and rn<=#{pageStart}+10
+	]]>
 	</select>
 
 	<!-- 게시물 불러오기 -->
@@ -35,7 +99,8 @@
 		TITLE, CONTENT, USER_NO as userNo, CATEGORY_NO as categoryNo,
 		A_DATE as
 		a_date, BOARD_NO as boardNo, GROUP_NO as groupNo,
-		step, indent, hit
+		step, indent, hit,
+		isdeleted
 		FROM
 		article
 		where
@@ -45,17 +110,20 @@
 	<!-- 게시물 수정하기 -->
 	<update id="modify">
 		UPDATE ARTICLE SET title = #{title}, content =
-		#{content}, category_no = #{categoryNo}, 
-		a_date = sysdate, user_no=#{userNo} 
+		#{content}, category_no = #{categoryNo},
+		a_date = sysdate,
+		user_no=#{userNo}
 		WHERE
 		article_no =
 		#{articleNo}
 	</update>
 
 	<!-- 게시물 삭제하기 -->
-	<delete id="delete">
-		DELETE FROM ARTICLE WHERE article_no = #{articleNo}
-	</delete>
+	<update id="delete">
+		UPDATE ARTICLE SET isdeleted=1
+		WHERE article_no =
+		#{articleNo}
+	</update>
 
 	<!-- 게시물 검색 -->
 	<select id="search" resultType="noticeBoard">
@@ -65,7 +133,7 @@
 		A_DATE as
 		a_date, BOARD_NO as boardNo,
 		GROUP_NO as groupNo,
-		step, indent, hit
+		step, indent, hit, isdeleted
 		FROM
 		article
 		where
@@ -76,21 +144,13 @@
 
 	<!-- 조건절 -->
 	<sql id="searchByType">
-		<choose>
-			<when test="searchType=='title'">
-				and title like concat(concat('%',#{keyword}),'%')
-			</when>
-			<otherwise>
-				<choose>
-					<when test="searchType=='content'">
-						and content like '%${keyword}%'
-					</when>
-					<otherwise>
-						and user_no=${keyword}
-					</otherwise>
-				</choose>
-			</otherwise>
-		</choose>
+		<where>
+		<if test="searchType== null or keyword==null"></if>
+			<if test="searchType== title">and title like concat(concat('%',#{keyword}),'%')</if>
+			<if test="searchType== content">and content like concat(concat('%',#{keyword}),'%')</if>
+			<if test="searchType== userNo">and userNo like concat(concat('%',#{keyword}),'%')</if>
+		</where>
+
 	</sql>
 	<!-- '%'||#{keyword}||'%' -->
 
@@ -125,14 +185,30 @@
 		=#{groupNo} and step > #{step}
 		]]>
 	</update>
-	
+
 	<!-- 답글쓰기 -->
 	<insert id="replyArticleWrite">
 		INSERT INTO ARTICLE(ARTICLE_NO, TITLE, CONTENT,
 		USER_NO, CATEGORY_NO,
-		A_DATE, BOARD_NO, GROUP_NO, step, indent, hit)
-		VALUES(ARTICLE_SEQ.NEXTVAL, #{title}, #{content}, #{userNo}, #{categoryNo},
-		sysdate, #{boardNo}, #{groupNo}, #{step}, #{indent}, 0)
+		A_DATE, BOARD_NO, GROUP_NO, step, indent, hit,
+		isdeleted)
+		VALUES(ARTICLE_SEQ.NEXTVAL, #{title}, #{content}, #{userNo},
+		#{categoryNo},
+		sysdate, #{boardNo}, #{groupNo}, #{step}, #{indent},
+		0,0)
 	</insert>
 
+	<select id="countPaging" resultType="int">
+	 <![CDATA[
+ 		select 
+   			count(article_no) 
+		from 
+			article 
+		where 
+			article_no > 0 
+	 ]]>
+	</select>
+	<select id="replyCount" resultType="int">
+	select count(reply_no) from REPLY where article_no=#{articleNo}
+	</select>
 </mapper>
